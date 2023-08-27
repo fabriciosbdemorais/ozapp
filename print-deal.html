@@ -6,6 +6,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css" integrity="sha256-2XFplPlrFClt0bIdPgpz8H7ojnk10H69xRqd9+uTShA=" crossorigin="anonymous"/>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
         <link rel="manifest" href="/manifest.json"> 
+        <meta name="theme-color" content="#1e3a3c" />
         <title>Projeto em PDF | Ozapp</title>
         <style>
             body{
@@ -310,6 +311,7 @@
                         window.location.href = 'projects';
                     }
                     this.project = project;
+                    console.log(this.project);
                     for (const environment of this.project.environments) {
                         for (const space of environment.spaces) {
                             // this.teamHoursTotal += space.contacts.reduce((max, contact) => {
@@ -323,20 +325,20 @@
                                         hours: 0,
                                     }
                                 }
-                                const contactValue = this.clearNumber(contact.price) * contact.serviceHours;
+                                const contactValue = this.clearNumber(contact.price) * Number(contact.serviceHours);
                                 this.teamById[contact.name].value += contactValue;
-                                this.teamById[contact.name].hours += contact.serviceHours;
+                                this.teamById[contact.name].hours += Number(contact.serviceHours);
                                 this.teamTotal += contactValue;
-                                this.teamHoursTotal += contact.serviceHours;
+                                this.teamHoursTotal += Number(contact.serviceHours);
                                 if (contact.type === 'partner') {
-                                    this.teamPartnersHoursTotal += contact.serviceHours;
+                                    this.teamPartnersHoursTotal += Number(contact.serviceHours);
                                 }
                                 this.team.push({
                                     name: contact.name,
                                     environmentName: environment.name,
                                     spaceName: space.name,
                                     serviceType: contact.serviceType,
-                                    serviceHours: contact.serviceHours,
+                                    serviceHours: Number(contact.serviceHours),
                                     priceType: contact.priceType,
                                     price: contact.price,
                                 })
