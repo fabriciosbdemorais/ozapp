@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;600&display=swap" rel="stylesheet">
+        <link href="app.css" rel="stylesheet">
+        <link rel="manifest" href="/manifest.json">
+        <title>Login OrganizaApp</title>
+        <style>
+            body {
+                display: grid;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                background-color: #e1e2e9;
+            }
+            main {
+                display: flex;
+                border-radius: 1em;
+                background-color: #fff;
+                box-shadow: rgba(100, 100, 111, 0.2) 0 7px 29px 0;
+                min-width: 70vw;
+                max-width: 25em;
+                height: 40em;
+                padding-top: 0;
+            }
+            form {
+                width: 50%;
+                padding: 2em;
+                display: flex;
+                flex-direction: column;
+                gap: 1em;
+            }
+            h1 {
+                font-size: 2.6em; 
+                margin-bottom: 0;
+            }
+            p {
+                margin-top: 0;
+                font-size: 1.8em;
+                max-width: 360px;
+            }
+            .banner {
+                width: 50%;
+                background-color: #C8C9CF;
+                margin: 1em;
+                border-radius: 1em;
+                height: calc(100% - 2em);
+            }
+            @media (max-width: 900px) {
+                main {
+                    flex-direction: column;
+                    height: 25em;
+                    width: 90vw;
+                }
+                p {
+                    font-size: 1.4em;
+                    max-width: 280px;
+                }
+                form {
+                    width: 100%;
+                }
+                .banner {
+                    display: none;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <main id="app" :class="{ 'loading': loading }">
+            <form @submit.prevent="sendCode">
+                <h1>Login</h1>
+                <p>Insira o seu email para receber o código de acesso</p>
+                <div class="field">
+                    <input required type="email" id="email" v-model="user.email" placeholder=" ">
+                    <label for="email" class="label">E-mail</label>
+                    <span class="focus-bg"></span>
+                </div>
+                <button class="btn" :disabled="loading">Receber código</button>
+            </form>
+            <div class="banner"></div>
+        </main>
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+        <script>
+            new Vue({
+                el: "#app",
+                data: {
+                    loading: false,
+                    user: {
+                        name: '',
+                        email: '',
+                        defaultHourPrice: 'R$ 100,00',
+                    }
+                },
+                methods: {
+                    sendCode() {
+                        this.loading = true;
+                        localStorage.setItem('USER', JSON.stringify(this.user));
+                        setTimeout(() => {
+                            this.loading = false;
+                            window.location = '/login-code';
+                        }, 1000);
+                    }
+                },
+                created() {
+                    setTimeout(() => {
+                        this.loading = false;
+                    }, 1000);
+                }
+            });
+        </script>
+    </body>
+</html>

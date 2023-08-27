@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;600&display=swap" rel="stylesheet">
+        <link href="/app.css" rel="stylesheet">
+        <link rel="manifest" href="/manifest.json">
+        <title>Editar projeto | Ozapp</title>
+    </head>
+    <body>
+        <nav class="nav">
+            <div class="nav-brand">
+                <img alt="Logo da OZ!" src="img/logo-light.svg">
+            </div>
+            <ul class="nav-menu">
+           <!-- <li>
+                    <a href="/dashboard"> -->
+                        <!-- <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewbox="0 0 448 512">! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc.<path d="M160 80c0-26.5 21.5-48 48-48h32c26.5 0 48 21.5 48 48V432c0 26.5-21.5 48-48 48H208c-26.5 0-48-21.5-48-48V80zM0 272c0-26.5 21.5-48 48-48H80c26.5 0 48 21.5 48 48V432c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V272zM368 96h32c26.5 0 48 21.5 48 48V432c0 26.5-21.5 48-48 48H368c-26.5 0-48-21.5-48-48V144c0-26.5 21.5-48 48-48z"/></svg> -->
+                        <!-- <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512">! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc.<path d="M144 144v48H304V144c0-44.2-35.8-80-80-80s-80 35.8-80 80zM80 192V144C80 64.5 144.5 0 224 0s144 64.5 144 144v48h16c35.3 0 64 28.7 64 64V448c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V256c0-35.3 28.7-64 64-64H80z"/></svg> -->
+                        <!-- <span>Dashboard</span>
+                    </a>
+                </li> -->
+                <li>
+                    <a href="projects">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewbox="0 0 640 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M80 48a48 48 0 1 1 96 0A48 48 0 1 1 80 48zm64 193.7v65.1l51 51c7.1 7.1 11.8 16.2 13.4 26.1l15.2 90.9c2.9 17.4-8.9 33.9-26.3 36.8s-33.9-8.9-36.8-26.3l-14.3-85.9L66.8 320C54.8 308 48 291.7 48 274.7V186.6c0-32.4 26.2-58.6 58.6-58.6c24.1 0 46.5 12 59.9 32l47.4 71.1 10.1 5V160c0-17.7 14.3-32 32-32H384c17.7 0 32 14.3 32 32v76.2l10.1-5L473.5 160c13.3-20 35.8-32 59.9-32c32.4 0 58.6 26.2 58.6 58.6v88.1c0 17-6.7 33.3-18.7 45.3l-79.4 79.4-14.3 85.9c-2.9 17.4-19.4 29.2-36.8 26.3s-29.2-19.4-26.3-36.8l15.2-90.9c1.6-9.9 6.3-19 13.4-26.1l51-51V241.7l-19 28.5c-4.6 7-11 12.6-18.5 16.3l-59.6 29.8c-2.4 1.3-4.9 2.2-7.6 2.8c-2.6 .6-5.3 .9-7.9 .8H256.7c-2.5 .1-5-.2-7.5-.7c-2.9-.6-5.6-1.6-8.1-3l-59.5-29.8c-7.5-3.7-13.8-9.4-18.5-16.3l-19-28.5zM2.3 468.1L50.1 348.6l49.2 49.2-37.6 94c-6.6 16.4-25.2 24.4-41.6 17.8S-4.3 484.5 2.3 468.1zM512 0a48 48 0 1 1 0 96 48 48 0 1 1 0-96zm77.9 348.6l47.8 119.5c6.6 16.4-1.4 35-17.8 41.6s-35-1.4-41.6-17.8l-37.6-94 49.2-49.2z"/></svg>
+                        <span>Projetos</span>
+                    </a>
+                </li>
+                <!-- <li>
+                    <a href="/contacts"> -->
+                        <!-- <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewbox="0 0 640 512">! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc.<path d="M211.2 96a64 64 0 1 0 -128 0 64 64 0 1 0 128 0zM32 256c0 17.7 14.3 32 32 32h85.6c10.1-39.4 38.6-71.5 75.8-86.6c-9.7-6-21.2-9.4-33.4-9.4H96c-35.3 0-64 28.7-64 64zm461.6 32H576c17.7 0 32-14.3 32-32c0-35.3-28.7-64-64-64H448c-11.7 0-22.7 3.1-32.1 8.6c38.1 14.8 67.4 47.3 77.7 87.4zM391.2 226.4c-6.9-1.6-14.2-2.4-21.6-2.4h-96c-8.5 0-16.7 1.1-24.5 3.1c-30.8 8.1-55.6 31.1-66.1 60.9c-3.5 10-5.5 20.8-5.5 32c0 17.7 14.3 32 32 32h224c17.7 0 32-14.3 32-32c0-11.2-1.9-22-5.5-32c-10.8-30.7-36.8-54.2-68.9-61.6zM563.2 96a64 64 0 1 0 -128 0 64 64 0 1 0 128 0zM321.6 192a80 80 0 1 0 0-160 80 80 0 1 0 0 160zM32 416c-17.7 0-32 14.3-32 32s14.3 32 32 32H608c17.7 0 32-14.3 32-32s-14.3-32-32-32H32z"/></svg> -->
+                        <!-- <span>Contatos</span>
+                    </a>
+                </li> -->
+            </ul>
+            <div class="nav-user">
+                <a href="/user">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewbox="0 0 640 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M224 0a128 128 0 1 1 0 256A128 128 0 1 1 224 0zM178.3 304h91.4c11.8 0 23.4 1.2 34.5 3.3c-2.1 18.5 7.4 35.6 21.8 44.8c-16.6 10.6-26.7 31.6-20 53.3c4 12.9 9.4 25.5 16.4 37.6s15.2 23.1 24.4 33c15.7 16.9 39.6 18.4 57.2 8.7v.9c0 9.2 2.7 18.5 7.9 26.3H29.7C13.3 512 0 498.7 0 482.3C0 383.8 79.8 304 178.3 304zM436 218.2c0-7 4.5-13.3 11.3-14.8c10.5-2.4 21.5-3.7 32.7-3.7s22.2 1.3 32.7 3.7c6.8 1.5 11.3 7.8 11.3 14.8v30.6c7.9 3.4 15.4 7.7 22.3 12.8l24.9-14.3c6.1-3.5 13.7-2.7 18.5 2.4c7.6 8.1 14.3 17.2 20.1 27.2s10.3 20.4 13.5 31c2.1 6.7-1.1 13.7-7.2 17.2l-25 14.4c.4 4 .7 8.1 .7 12.3s-.2 8.2-.7 12.3l25 14.4c6.1 3.5 9.2 10.5 7.2 17.2c-3.3 10.6-7.8 21-13.5 31s-12.5 19.1-20.1 27.2c-4.8 5.1-12.5 5.9-18.5 2.4l-24.9-14.3c-6.9 5.1-14.3 9.4-22.3 12.8l0 30.6c0 7-4.5 13.3-11.3 14.8c-10.5 2.4-21.5 3.7-32.7 3.7s-22.2-1.3-32.7-3.7c-6.8-1.5-11.3-7.8-11.3-14.8V454.8c-8-3.4-15.6-7.7-22.5-12.9l-24.7 14.3c-6.1 3.5-13.7 2.7-18.5-2.4c-7.6-8.1-14.3-17.2-20.1-27.2s-10.3-20.4-13.5-31c-2.1-6.7 1.1-13.7 7.2-17.2l24.8-14.3c-.4-4.1-.7-8.2-.7-12.4s.2-8.3 .7-12.4L343.8 325c-6.1-3.5-9.2-10.5-7.2-17.2c3.3-10.6 7.7-21 13.5-31s12.5-19.1 20.1-27.2c4.8-5.1 12.4-5.9 18.5-2.4l24.8 14.3c6.9-5.1 14.5-9.4 22.5-12.9V218.2zm92.1 133.5a48.1 48.1 0 1 0 -96.1 0 48.1 48.1 0 1 0 96.1 0z"/></svg>
+                </a>
+            </div>
+        </nav>
+        <main id="app" class="page-content" :class="{ 'loading': loading }">
+            <div class="page-header">
+                <div>
+                    <h1>{{ project.name }}&nbsp;</h1>
+                    <p>{{project.clientName}}&nbsp;</p>
+                </div>
+                <button class="btn btn-save" @click="onSaveProject">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V173.3c0-17-6.7-33.3-18.7-45.3L352 50.7C340 38.7 323.7 32 306.7 32H64zm0 96c0-17.7 14.3-32 32-32H288c17.7 0 32 14.3 32 32v64c0 17.7-14.3 32-32 32H96c-17.7 0-32-14.3-32-32V128zM224 288a64 64 0 1 1 0 128 64 64 0 1 1 0-128z"/></svg>
+                    <span>Salvar</span>
+                </button>
+            </div>
+            <div>
+                <div class="tab" style="--progress-width: 35.33%;">
+                    <button onclick="openTab(event, 'Tab1')" class="tab-links active">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewbox="0 0 512 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M495.9 166.6c3.2 8.7 .5 18.4-6.4 24.6l-43.3 39.4c1.1 8.3 1.7 16.8 1.7 25.4s-.6 17.1-1.7 25.4l43.3 39.4c6.9 6.2 9.6 15.9 6.4 24.6c-4.4 11.9-9.7 23.3-15.8 34.3l-4.7 8.1c-6.6 11-14 21.4-22.1 31.2c-5.9 7.2-15.7 9.6-24.5 6.8l-55.7-17.7c-13.4 10.3-28.2 18.9-44 25.4l-12.5 57.1c-2 9.1-9 16.3-18.2 17.8c-13.8 2.3-28 3.5-42.5 3.5s-28.7-1.2-42.5-3.5c-9.2-1.5-16.2-8.7-18.2-17.8l-12.5-57.1c-15.8-6.5-30.6-15.1-44-25.4L83.1 425.9c-8.8 2.8-18.6 .3-24.5-6.8c-8.1-9.8-15.5-20.2-22.1-31.2l-4.7-8.1c-6.1-11-11.4-22.4-15.8-34.3c-3.2-8.7-.5-18.4 6.4-24.6l43.3-39.4C64.6 273.1 64 264.6 64 256s.6-17.1 1.7-25.4L22.4 191.2c-6.9-6.2-9.6-15.9-6.4-24.6c4.4-11.9 9.7-23.3 15.8-34.3l4.7-8.1c6.6-11 14-21.4 22.1-31.2c5.9-7.2 15.7-9.6 24.5-6.8l55.7 17.7c13.4-10.3 28.2-18.9 44-25.4l12.5-57.1c2-9.1 9-16.3 18.2-17.8C227.3 1.2 241.5 0 256 0s28.7 1.2 42.5 3.5c9.2 1.5 16.2 8.7 18.2 17.8l12.5 57.1c15.8 6.5 30.6 15.1 44 25.4l55.7-17.7c8.8-2.8 18.6-.3 24.5 6.8c8.1 9.8 15.5 20.2 22.1 31.2l4.7 8.1c6.1 11 11.4 22.4 15.8 34.3zM256 336a80 80 0 1 0 0-160 80 80 0 1 0 0 160z"/></svg>
+                        <span>Definições gerais</span>
+                    </button>
+                    <button onclick="openTab(event, 'Tab2')" class="tab-links">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewbox="0 0 512 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"/></svg>
+                        <span>Levantamento técnico</span>
+                    </button>
+                    <button onclick="openTab(event, 'Tab3')" class="tab-links">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewbox="0 0 640 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M416 176c0 97.2-93.1 176-208 176c-38.2 0-73.9-8.7-104.7-23.9c-7.5 4-16 7.9-25.2 11.4C59.8 346.4 37.8 352 16 352c-6.9 0-13.1-4.5-15.2-11.1s.2-13.8 5.8-17.9l0 0 0 0 .2-.2c.2-.2 .6-.4 1.1-.8c1-.8 2.5-2 4.3-3.7c3.6-3.3 8.5-8.1 13.3-14.3c5.5-7 10.7-15.4 14.2-24.7C14.7 250.3 0 214.6 0 176C0 78.8 93.1 0 208 0S416 78.8 416 176zM231.5 383C348.9 372.9 448 288.3 448 176c0-5.2-.2-10.4-.6-15.5C555.1 167.1 640 243.2 640 336c0 38.6-14.7 74.3-39.6 103.4c3.5 9.4 8.7 17.7 14.2 24.7c4.8 6.2 9.7 11 13.3 14.3c1.8 1.6 3.3 2.9 4.3 3.7c.5 .4 .9 .7 1.1 .8l.2 .2 0 0 0 0c5.6 4.1 7.9 11.3 5.8 17.9c-2.1 6.6-8.3 11.1-15.2 11.1c-21.8 0-43.8-5.6-62.1-12.5c-9.2-3.5-17.8-7.4-25.2-11.4C505.9 503.3 470.2 512 432 512c-95.6 0-176.2-54.6-200.5-129zM228 72c0-11-9-20-20-20s-20 9-20 20V86c-7.6 1.7-15.2 4.4-22.2 8.5c-13.9 8.3-25.9 22.8-25.8 43.9c.1 20.3 12 33.1 24.7 40.7c11 6.6 24.7 10.8 35.6 14l1.7 .5c12.6 3.8 21.8 6.8 28 10.7c5.1 3.2 5.8 5.4 5.9 8.2c.1 5-1.8 8-5.9 10.5c-5 3.1-12.9 5-21.4 4.7c-11.1-.4-21.5-3.9-35.1-8.5c-2.3-.8-4.7-1.6-7.2-2.4c-10.5-3.5-21.8 2.2-25.3 12.6s2.2 21.8 12.6 25.3c1.9 .6 4 1.3 6.1 2.1l0 0 0 0c8.3 2.9 17.9 6.2 28.2 8.4V280c0 11 9 20 20 20s20-9 20-20V266.2c8-1.7 16-4.5 23.2-9c14.3-8.9 25.1-24.1 24.8-45c-.3-20.3-11.7-33.4-24.6-41.6c-11.5-7.2-25.9-11.6-37.1-15l-.7-.2c-12.8-3.9-21.9-6.7-28.3-10.5c-5.2-3.1-5.3-4.9-5.3-6.7c0-3.7 1.4-6.5 6.2-9.3c5.4-3.2 13.6-5.1 21.5-5c9.6 .1 20.2 2.2 31.2 5.2c10.7 2.8 21.6-3.5 24.5-14.2s-3.5-21.6-14.2-24.5c-6.5-1.7-13.7-3.4-21.1-4.7V72z"/></svg>
+                        <span>Proposta comercial</span>
+                    </button>
+                    <!-- <button onclick="openTab(event, 'Tab4')" class="tab-links disabled">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewbox="0 0 512 512">! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc.<path d="M0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zM188.3 147.1c-7.6 4.2-12.3 12.3-12.3 20.9V344c0 8.7 4.7 16.7 12.3 20.9s16.8 4.1 24.3-.5l144-88c7.1-4.4 11.5-12.1 11.5-20.5s-4.4-16.1-11.5-20.5l-144-88c-7.4-4.5-16.7-4.7-24.3-.5z"/></svg>
+                        <span>Execução</span>
+                    </button>
+                    <button onclick="openTab(event, 'Tab5')" class="tab-links disabled">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewbox="0 0 576 512">! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc.<path d="M234.7 42.7L197 56.8c-3 1.1-5 4-5 7.2s2 6.1 5 7.2l37.7 14.1L248.8 123c1.1 3 4 5 7.2 5s6.1-2 7.2-5l14.1-37.7L315 71.2c3-1.1 5-4 5-7.2s-2-6.1-5-7.2L277.3 42.7 263.2 5c-1.1-3-4-5-7.2-5s-6.1 2-7.2 5L234.7 42.7zM46.1 395.4c-18.7 18.7-18.7 49.1 0 67.9l34.6 34.6c18.7 18.7 49.1 18.7 67.9 0L529.9 116.5c18.7-18.7 18.7-49.1 0-67.9L495.3 14.1c-18.7-18.7-49.1-18.7-67.9 0L46.1 395.4zM484.6 82.6l-105 105-23.3-23.3 105-105 23.3 23.3zM7.5 117.2C3 118.9 0 123.2 0 128s3 9.1 7.5 10.8L64 160l21.2 56.5c1.7 4.5 6 7.5 10.8 7.5s9.1-3 10.8-7.5L128 160l56.5-21.2c4.5-1.7 7.5-6 7.5-10.8s-3-9.1-7.5-10.8L128 96 106.8 39.5C105.1 35 100.8 32 96 32s-9.1 3-10.8 7.5L64 96 7.5 117.2zm352 256c-4.5 1.7-7.5 6-7.5 10.8s3 9.1 7.5 10.8L416 416l21.2 56.5c1.7 4.5 6 7.5 10.8 7.5s9.1-3 10.8-7.5L480 416l56.5-21.2c4.5-1.7 7.5-6 7.5-10.8s-3-9.1-7.5-10.8L480 352l-21.2-56.5c-1.7-4.5-6-7.5-10.8-7.5s-9.1 3-10.8 7.5L416 352l-56.5 21.2z"/></svg>
+                        <span>Visita de aplicabilidade</span>
+                    </button>
+                    <button onclick="openTab(event, 'Tab6')" class="tab-links disabled">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewbox="0 0 576 512">! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc.<path d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"/></svg>
+                        <span>Resultados</span>
+                    </button> -->
+                </div>
+                <div id="Tab1" class="tab-content show">
+                    <div class="tab-header tab-header-onlytitle">
+                        <h2>Definições gerais</h2>
+                    </div>
+                    <form @submit.prevent="onSaveProject">
+                        <div class="content-groups">
+                            <div class="content-group">
+                                <label class="content-group-label">Informações</label>
+                                <div class="field">
+                                    <input required type="text" id="name" v-model="project.name" placeholder=" ">
+                                    <label for="name">Nome do projeto</label>
+                                    <span class="focus-bg"></span>
+                                </div>
+                                <div class="field">
+                                    <select id="status" v-model="project.status">
+                                        <option value="Em aberto">Em aberto</option>
+                                        <option value="Proposta enviada">Proposta enviada</option>
+                                        <option value="Aprovado">Aprovado</option>
+                                        <option value="Em andamento">Em andamento</option>
+                                        <option value="Quase concluído">Quase concluído</option>
+                                        <option value="Concluído">Concluído</option>
+                                        <option value="Perdido">Perdido</option>
+                                    </select>
+                                    <label for="status">Situação do projeto</label>
+                                </div>
+                                <div class="field">
+                                    <input type="number" id="daily-journey-time" v-model="project.dailyJourneyTime" @change="validateDailyJourneyTime" placeholder=" ">
+                                    <label for="daily-journey-time">Horas disponíveis por dia</label>
+                                    <span class="focus-bg"></span>
+                                </div>
+                                <!-- <div class="field">
+                                    <input type="text" id="start-date" v-model="project.startDate" placeholder=" ">
+                                    <label for="start-date">Data inicial do projeto</label>
+                                    <span class="focus-bg"></span>
+                                </div>
+                                <div class="field">
+                                    <input type="text" id="finished-date" v-model="project.endDate" placeholder=" ">
+                                    <label for="finished-date">Data final do projeto</label>
+                                    <span class="focus-bg"></span>
+                                </div> -->
+                                <!-- <div class="field">
+                                    <textarea id="observations" rows="4" v-model="project.observations" placeholder=" "></textarea>
+                                    <label for="observations">Observações internas</label>
+                                    <div class="focus-bg"></div>
+                                </div> -->
+                                <button type="button" class="btn btn-small btn-warning" @click="deleteProject" style="align-self: end">
+                                    <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"/></svg>
+                                    <span>Excluir projeto</span>
+                                </button>
+                            </div>
+                            <div class="content-group">
+                                <label class="content-group-label">Cliente</label>
+                                <div class="field">
+                                    <input type="text" id="client-id" v-model="project.clientName" placeholder=" ">
+                                    <label for="client-id">Nome do cliente</label>
+                                    <span class="focus-bg"></span>
+                                </div>
+                                <div class="field">
+                                    <input required type="text" id="client-phone" v-model="project.clientPhone" placeholder=" ">
+                                    <label for="name">Telefone do cliente</label>
+                                    <span class="focus-bg"></span>
+                                </div>
+                                <div class="field">
+                                    <input required type="email" id="client-email" v-model="project.clientEmail" placeholder=" ">
+                                    <label for="name">E-mail do cliente</label>
+                                    <span class="focus-bg"></span>
+                                </div>
+                                <!-- <div class="field">
+                                    <input type="text" id="employee-name" v-model="project.employeeName" placeholder=" ">
+                                    <label for="employee-name">Nome da empregada</label>
+                                    <span class="focus-bg"></span>
+                                </div> -->
+                                <!-- <div class="field">
+                                    <input type="text" id="proposal-send-date" v-model="project.proposalSendDate" placeholder=" ">
+                                    <label for="proposal-send-date" >Data de envio da proposta</label>
+                                    <span class="focus-bg"></span>
+                                </div>
+                                <div class="field">
+                                    <input type="text" id="proposal-accept-date" v-model="project.proposalAcceptDate" placeholder=" ">
+                                    <label for="proposal-accept-date">Data de aceite da proposta</label>
+                                    <span class="focus-bg"></span>
+                                </div> -->
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div id="Tab2" class="tab-content">
+                    <div class="tab-header">
+                        <h2>Levantamento técnico</h2>
+                        <button class="btn btn-small" @click="addEnvironment" style="align-self: flex-end;">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"/></svg>
+                            <span>Ambiente</span>
+                        </button>
+                    </div>
+                    <div class="content-groups">
+                        <div class="content-group" v-for="(environment, eIndex) in project.environments">
+                            <label class="content-group-label">Ambiente</label>
+                            <div class="field">
+                                <input required type="text" :id="`env${eIndex}-name`" v-model="environment.name" placeholder=" ">
+                                <label :for="`env${eIndex}-name`">Nome do ambiente</label>
+                                <span class="focus-bg"></span>
+                            </div>
+                            <div class="field">
+                                <textarea :id="`env${eIndex}-description`" rows="2" v-model="environment.description" placeholder=" "></textarea>
+                                <label :for="`env${eIndex}-description`">Descrição do ambiente</label>
+                                <div class="focus-bg"></div>
+                            </div>
+                            <!-- <div class="checkbox-group">
+                                <div class="checkbox" v-for="(checklistItem, checklistItemIndex) in environment.checklist">
+                                    <input type="checkbox" :id="`env${eIndex}-checklistitem${checklistItemIndex}`" v-model="checklistItem.checked">
+                                    <label :for="`env${eIndex}-checklistitem${checklistItemIndex}`">{{checklistItem.name}}</label>
+                                </div>
+                            </div> -->
+                            <div style="display: flex;justify-content:flex-end;align-items: center;gap: 1em">
+                                <button class="btn btn-small btn-warning" @click="removeEnvironment(environment, project.environments, eIndex)" style="align-self: flex-end">
+                                    <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"/></svg>
+                                    <span>Remover ambiente</span>
+                                </button>
+                                <button class="btn btn-small" @click="addSpace(environment)" style="align-self: flex-end;">
+                                    <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"/></svg>
+                                    <span>Espaço</span>
+                                </button>
+                            </div>
+                            <div class="content-groups">
+                                <div class="content-group" v-for="(space, sIndex) in environment.spaces" style="padding:0">
+                                    <div class="field">
+                                        <input required type="text" :id="`env${eIndex}-space${sIndex}-name`" v-model="space.name" placeholder=" " @focus="setCurrentFieldsBlock(space.id)">
+                                        <label :for="`env${eIndex}-space${sIndex}-name`">Nome do espaço</label>
+                                        <span class="focus-bg"></span>
+                                    </div>
+                                    <div :class="{hidden: currentFieldsBlockId !== space.id}" class="collapsed-fields">
+                                        <button class="btn btn-small btn-warning" @click="removeSpace(space, environment.spaces, index)" style="margin-bottom: 1em; align-self: center">
+                                            <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512">! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc.<path d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"/></svg>
+                                            <span>Remover espaço</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="Tab3" class="tab-content">
+                    <div class="tab-header">
+                        <h2>Proposta comercial</h2>
+                        <a class="btn btn-small" :href="'print-deal?project_id='+project.id" target="_blank">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 384 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M64 0C28.7 0 0 28.7 0 64V448c0 35.3 28.7 64 64 64H320c35.3 0 64-28.7 64-64V64c0-35.3-28.7-64-64-64H64zM96 64H288c17.7 0 32 14.3 32 32v32c0 17.7-14.3 32-32 32H96c-17.7 0-32-14.3-32-32V96c0-17.7 14.3-32 32-32zm32 160a32 32 0 1 1 -64 0 32 32 0 1 1 64 0zM96 352a32 32 0 1 1 0-64 32 32 0 1 1 0 64zM64 416c0-17.7 14.3-32 32-32h96c17.7 0 32 14.3 32 32s-14.3 32-32 32H96c-17.7 0-32-14.3-32-32zM192 256a32 32 0 1 1 0-64 32 32 0 1 1 0 64zm32 64a32 32 0 1 1 -64 0 32 32 0 1 1 64 0zm64-64a32 32 0 1 1 0-64 32 32 0 1 1 0 64zm32 64a32 32 0 1 1 -64 0 32 32 0 1 1 64 0zM288 448a32 32 0 1 1 0-64 32 32 0 1 1 0 64z"/></svg>
+                            <span>Calcular</span>
+                        </a>
+                    </div>
+                    <div class="deal-categories">
+                        <ul class="deal-categories-menu">
+                            <li>
+                                <button :class="{ 'active': tabDealCurrent === 'team' }" @click="setTabDeal('team')">
+                                    Equipe
+                                </button>
+                            </li>
+                            <li>
+                                <button :class="{ 'active': tabDealCurrent === 'variables' }" @click="setTabDeal('variables')">
+                                    Custos
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="content-groups" :class="{ 'hidden': tabDealCurrent !== 'team' }">
+                        <div class="content-group" v-for="(environment, eIndex) in project.environments">
+                            <label class="content-group-label">{{environment.name}}</label>
+                            <div class="content-groups">
+                                <div class="content-group" v-for="(space, sIndex) in environment.spaces">
+                                    <label class="content-group-label">{{space.name}}</label>
+                                    <button class="btn btn-small" @click="addContact(space)" style="margin-bottom: 1em;align-self: flex-start">
+                                        <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"/></svg>
+                                        <span>Adicionar PO</span>
+                                    </button>
+                                    <div class="content-groups">
+                                        <div class="content-group" v-for="(contact, cIndex) in space.contacts" style="padding:0;gap:0;">
+                                            <div class="field">
+                                                <input required type="text" :id="`env${eIndex}-space${sIndex}-contact${cIndex}-name`" v-model="contact.name" placeholder=" " @focus="setCurrentFieldsBlock(contact.id)">
+                                                <label :for="`env${eIndex}-space${sIndex}-contact${cIndex}-name`">Personal Organizer</label>
+                                                <span class="focus-bg"></span>
+                                            </div>
+                                            <div :class="{hidden: currentFieldsBlockId !== contact.id}" class="collapsed-fields">
+                                                <div class="field">
+                                                    <select :id="`env${eIndex}-space${sIndex}-contact${cIndex}-servicetype`" v-model="contact.serviceType">
+                                                        <option value="Presencial">Presencial</option>
+                                                        <option value="Online">Online</option>
+                                                    </select>
+                                                    <label :for="`env${eIndex}-space${sIndex}-contact${cIndex}-servicetype`">Modalidade</label>
+                                                </div>
+                                                <!-- <div class="field">
+                                                    <select :id="`env${eIndex}-space${sIndex}-contact${cIndex}-pricetype`" v-model="contact.priceType">
+                                                        <option value="Fixo">Fixo</option>
+                                                        <option value="Hora">Hora</option>
+                                                    </select>
+                                                    <label :for="`env${eIndex}-space${sIndex}-contact${cIndex}-pricetype`">Tipo de valor</label>
+                                                </div> -->
+                                                <div class="field">
+                                                    <input type="number" :id="`env${eIndex}-space${sIndex}-contact${cIndex}-servicehours`" v-model="contact.serviceHours" placeholder=" ">
+                                                    <label :for="`env${eIndex}-space${sIndex}-contact${cIndex}-servicehours`">Quantidade de horas</label>
+                                                    <span class="focus-bg"></span>
+                                                </div>
+                                                <div class="field">
+                                                    <input type="tel" :id="`env${eIndex}-space${sIndex}-contact${cIndex}-price`" v-model.lazy="contact.price" v-money="moneyOptions" placeholder=" ">
+                                                    <label :for="`env${eIndex}-space${sIndex}-contact${cIndex}-price`">Valor/Hora</label>
+                                                    <span class="focus-bg"></span>
+                                                </div>
+                                                <button class="btn btn-small btn-warning" @click="removeContact(contact, space.contacts, index)" style="margin: 1em; align-self: center">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc.--><path d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"/></svg>
+                                                    <span>Remover PO</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="content-groups" :class="{ 'hidden': tabDealCurrent !== 'variables' }">
+                        <div class="content-group">
+                            <label class="content-group-label">Custos de atividades</label>
+                            <div v-for="(variable, index) in project.costActivityVariables" class="content-group" style="padding:.3em">
+                                <div class="field">
+                                    <textarea required type="text" rows="2" id="name" v-model="variable.name" placeholder=" " @focus="setCurrentFieldsBlock(variable.id)"></textarea>
+                                    <label for="name">Nome da atividade</label>
+                                    <span class="focus-bg"></span>
+                                </div>
+                                <div :class="{hidden: currentFieldsBlockId !== variable.id}" class="collapsed-fields">
+                                    <div class="field">
+                                        <input required type="number" id="name" v-model="variable.value" placeholder=" ">
+                                        <label for="name">Horas para concluir</label>
+                                        <span class="focus-bg"></span>
+                                    </div>
+                                    <button class="btn btn-small btn-warning" @click="removeCostActivity(variable, project.costActivityVariables, index)" style="margin: 1em; align-self: center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"/></svg>
+                                        <span>Remover atividade</span>
+                                    </button>
+                                </div>
+                            </div>
+                            <button class="btn btn-small" @click="addCostActivity" style="margin-bottom: 1em;align-self: flex-end">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"/></svg>
+                                <span>Adicionar atividade</span>
+                            </button>
+                        </div>
+                        <div class="content-group">
+                            <label class="content-group-label">Custos dinâmicos</label>
+                            <div v-for="(variable, index) in project.costDinamicVariables" class="content-group" style="padding:0">
+                                <div class="field">
+                                    <textarea required type="text" rows="2" id="name" v-model="variable.name" placeholder=" " @focus="setCurrentFieldsBlock(variable.id)"></textarea>
+                                    <label for="name">Nome da variável</label>
+                                    <span class="focus-bg"></span>
+                                </div>
+                                <div :class="{hidden: currentFieldsBlockId !== variable.id}" class="collapsed-fields">
+                                    <div class="field">
+                                        <input required type="tel" id="name" v-model="variable.value" v-money="moneyOptions" placeholder=" ">
+                                        <label for="name">Valor diário</label>
+                                        <span class="focus-bg"></span>
+                                    </div>
+                                    <button class="btn btn-small btn-warning" @click="removeCostDinamic(variable, project.costDinamicVariables, index)" style="margin: 1em; align-self: center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"/></svg>
+                                        <span>Remover variável</span>
+                                    </button>
+                                </div>
+                            </div>
+                            <button class="btn btn-small" @click="addCostDinamic" style="margin-bottom: 1em;align-self: flex-end">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"/></svg>
+                                <span>Adicionar variável</span>
+                            </button>
+                        </div>
+                        <div class="content-group">
+                            <label class="content-group-label">Custos de materiais</label>
+                            <div v-for="(variable, index) in project.costMaterialVariables" class="content-group" style="padding:0">
+                                <div class="field">
+                                    <textarea required type="text" rows="2" id="name" v-model="variable.name" placeholder=" " @focus="setCurrentFieldsBlock(variable.id)"></textarea>
+                                    <label for="name">Nome do material</label>
+                                    <span class="focus-bg"></span>
+                                </div>
+                                <div :class="{hidden: currentFieldsBlockId !== variable.id}" class="collapsed-fields">
+                                    <div class="field">
+                                        <input type="number" id="daily-journey-time" v-model="variable.quantity" placeholder=" ">
+                                        <label for="daily-journey-time">Quantidade</label>
+                                        <span class="focus-bg"></span>
+                                    </div>
+                                    <div class="field">
+                                        <input required type="tel" id="name" v-model="variable.value" v-money="moneyOptions" placeholder=" ">
+                                        <label for="name">Preço</label>
+                                        <span class="focus-bg"></span>
+                                    </div>
+                                    <button class="btn btn-small btn-warning" @click="removeCostMaterial(variable, project.costMaterialVariables, index)" style="margin: 1em; align-self: center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"/></svg>
+                                        <span>Remover material</span>
+                                    </button>
+                                </div>
+                            </div>
+                            <button class="btn btn-small" @click="addCostMaterial" style="margin-bottom: 1em;align-self: flex-end">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"/></svg>
+                                <span>Adicionar material</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div id="Tab4" class="tab-content">
+                    <div class="tab-header tab-header-onlytitle">
+                        <h2>Execução</h2>
+                    </div>
+                    <div class="content-groups">
+                        <div class="content-group" v-for="(environment, eIndex) in project.environments">
+                            <label class="content-group-label">{{environment.name}}</label>
+                            <div class="content-groups">
+                                <div class="content-group" v-for="(space, sIndex) in environment.spaces">
+                                    <label class="content-group-label">{{space.name}}</label>
+                                    <div class="content-groups">
+                                        <div class="content-groups">
+                                            <div class="content-group" v-for="(contact, cIndex) in space.contacts" style="padding-top: 2em">
+                                                <label class="content-group-label">{{contact.name}}</label>
+                                                <div class="times">
+                                                    <div class="field">
+                                                        <input required type="text" :id="`env${eIndex}-space${sIndex}-contact${cIndex}-name`" v-model="contact.startAt" placeholder=" ">
+                                                        <label :for="`env${eIndex}-space${sIndex}-contact${cIndex}-name`">Data e hora inicial programada</label>
+                                                        <span class="focus-bg"></span>
+                                                    </div>
+                                                    <div class="field">
+                                                        <input required type="text" :id="`env${eIndex}-space${sIndex}-contact${cIndex}-name`" v-model="contact.endAt" placeholder=" ">
+                                                        <label :for="`env${eIndex}-space${sIndex}-contact${cIndex}-name`">Data e hora final programada</label>
+                                                        <span class="focus-bg"></span>
+                                                    </div>
+                                                    <div class="field">
+                                                        <input required type="text" :id="`env${eIndex}-space${sIndex}-contact${cIndex}-name`" v-model="contact.startedAt" placeholder=" ">
+                                                        <label :for="`env${eIndex}-space${sIndex}-contact${cIndex}-name`">Data e hora iniciado</label>
+                                                        <span class="focus-bg"></span>
+                                                    </div>
+                                                    <div class="field">
+                                                        <input required type="text" :id="`env${eIndex}-space${sIndex}-contact${cIndex}-name`" v-model="contact.endedAt" placeholder=" ">
+                                                        <label :for="`env${eIndex}-space${sIndex}-contact${cIndex}-name`">Data e hora finalizado</label>
+                                                        <span class="focus-bg"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="Tab5" class="tab-content">
+                    <div class="tab-header tab-header-onlytitle">
+                        <h2>Execução</h2>
+                    </div>
+                    <div class="content-groups">
+                        <div class="content-group" v-for="(environment, eIndex) in project.environments">
+                            <label class="content-group-label">{{environment.name}}</label>
+                        </div>
+                      
+                    </div>
+                </div>
+                <div id="Tab6" class="tab-content">
+                    <div class="tab-header tab-header-onlytitle">
+                        <h2>Resultados</h2>
+                    </div>
+                    <div class="content-groups">
+                        <div class="content-group" v-for="(environment, eIndex) in project.environments">
+                            <label class="content-group-label">{{environment.name}}</label>
+                        </div>
+                    </div>
+                </div> -->
+            </div>
+            <p style="text-align: center;"><small>Ozapp v1.0.0 Beta</small></p>
+        </main>
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/v-money@0.8.1/dist/v-money.min.js"></script>
+        <script src="app.js"></script>
+        <script>
+            new Vue({
+                el: "#app",
+                data: {
+                    loading: true,
+                    tabDealCurrent: 'team',
+                    currentFieldsBlockId: '',
+                    currentFieldsBlockNext: false,
+                    moneyOptions: {
+                        decimal: ',',
+                        thousands: '.',
+                        prefix: 'R$ ',
+                        precision: 2,
+                        masked: false,
+                    },
+                    project: {},
+                },
+                created() {
+                    const projectsStore = JSON.parse(localStorage.getItem("PROJECTS"));
+                    const urlParams = new URLSearchParams(window.location.search);
+                    const projectId = urlParams.get('project_id');
+                    const isProjectNew = urlParams.get('new');
+                    const project = projectsStore?.find(project => project.id === projectId);
+                    this.loading = false;
+                    if (!project && !isProjectNew) {
+                        window.location.href = '/projects';
+                    }
+                    this.project = project ? project : {id: this.uuidv4(), ...PROJECT_BLANK};
+                },
+                methods: {
+                    onSaveProject() {
+                        const projectsStore = JSON.parse(localStorage.getItem("PROJECTS"));
+                        const urlParams = new URLSearchParams(window.location.search);
+                        const projectId = urlParams.get('project_id');
+                        if (projectId) {
+                            const projectIndex = projectsStore.findIndex(project => project.id === projectId);
+                            projectsStore[projectIndex] = this.project;
+                        } else { 
+                            projectsStore.unshift(this.project);
+                        }
+                        localStorage.setItem('PROJECTS', JSON.stringify(projectsStore));
+                        alert('Projeto salvo com sucesso!');
+                    },
+                    setTabDeal(view) {
+                        this.tabDealCurrent = view;
+                    },
+                    addEnvironment() {
+                        this.project.environments.unshift({
+                            id: this.uuidv4(),
+                            name: 'Ambiente ' + (this.project.environments.length + 1),
+                            spaces: [],
+                        });
+                    },
+                    addSpace(environment) {
+                        environment.spaces.unshift({
+                            id: this.uuidv4(),
+                            name: 'Espaço ' + (environment.spaces.length + 1),
+                            contacts: [],
+                        });
+                    },
+                    addContact(space) {
+                        const userStore = JSON.parse(localStorage.getItem("USER"));
+                        space.contacts.unshift({
+                            id: this.uuidv4(),
+                            name: '',
+                            serviceType: 'Presencial',
+                            priceType: 'Hora',
+                            serviceHours: 1,
+                            price: userStore ? userStore.defaultHourPrice : 'R$ 100,00',
+                        });
+                    },
+                    addCostDinamic() {
+                        this.project.costDinamicVariables.push({
+                            id: this.uuidv4(),
+                            name: '',
+                            value: 0,
+                        });
+                    },
+                    addCostMaterial() {
+                        this.project.costMaterialVariables.push({
+                            id: this.uuidv4(),
+                            name: '',
+                            quantity: 1,
+                            value: 0,
+                        });
+                    },
+                    addCostActivity() {
+                        this.project.costActivityVariables.push({
+                            id: this.uuidv4(),
+                            name: '',
+                            value: 0,
+                        });
+                    },
+                    validateDailyJourneyTime() {
+                        if (this.project.dailyJourneyTime < 1) {
+                            this.project.dailyJourneyTime = 1;
+                        } else if (this.project.dailyJourneyTime > 24) {
+                            this.project.dailyJourneyTime = 24;
+                        }
+                    },
+                    removeEnvironment(environment, environments, index) {
+                        if (window.confirm(`Deseja realmente excluir o ambiente ${environment.name}? Todos os dados deste ambiente serão apagados`)) {
+                            environments.splice(index, 1);
+                        }
+                    },
+                    removeSpace(space, spaces, index) {
+                        if (window.confirm(`Deseja realmente excluir o espaço ${space.name}? Todos os dados deste espaço serão apagados`)) {
+                            spaces.splice(index, 1);
+                        }
+                    },
+                    removeContact(contact, contacts, index) {
+                        if (window.confirm(`Deseja realmente excluir o espaço ${contact.name}? Todos os dados desta personal organizer serão apagados`)) {
+                            contacts.splice(index, 1);
+                        }
+                    },
+                    removeCostDinamic(variable, variables, index) {
+                        if (window.confirm(`Deseja realmente excluir o custo dinâmico ${variable.name}? Todos os dados desta variável serão apagados`)) {
+                            variables.splice(index, 1);
+                        }
+                    },
+                    removeCostMaterial(variable, variables, index) {
+                        if (window.confirm(`Deseja realmente excluir o custo de material ${variable.name}? Todos os dados deste material serão apagados`)) {
+                            variables.splice(index, 1);
+                        }
+                    },
+                    removeCostActivity(variable, variables, index) {
+                        if (window.confirm(`Deseja realmente excluir o custo de atividade ${variable.name}? Todos os dados desta atividade serão apagados`)) {
+                            variables.splice(index, 1);
+                        }
+                    },
+                    deleteProject() {
+                        if (window.confirm(`Deseja realmente excluir o projeto ${this.project.name}? Todos os dados deste projeto serão apagados`)) {
+                            const projectsStore = JSON.parse(localStorage.getItem("PROJECTS"));
+                            const urlParams = new URLSearchParams(window.location.search);
+                            const projectId = urlParams.get('project_id');
+                            if (projectId) {
+                                const projectIndex = projectsStore.findIndex(project => project.id === projectId);
+                                projectsStore.splice(projectIndex, 1);
+                            } else { 
+                                window.location.href = '/projects';
+                            }
+                            localStorage.setItem('PROJECTS', JSON.stringify(projectsStore));
+                            alert('Projeto excluído com sucesso!');
+                            window.location.href = '/projects';
+                        }
+                    },
+                    setCurrentFieldsBlock(blockId) {
+                        this.currentFieldsBlockId = blockId;
+                    },
+                    uuidv4() {
+                        return ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c =>
+                            (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
+                        );
+                    },
+                },
+            });
+        </script>
+    </body>
+</html>

@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css" integrity="sha256-2XFplPlrFClt0bIdPgpz8H7ojnk10H69xRqd9+uTShA=" crossorigin="anonymous"/>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+        <link rel="manifest" href="/manifest.json"> 
+        <title>Projeto em PDF | Ozapp</title>
+        <style>
+            body{
+                margin-top: 20px;
+                margin-bottom: 20px;
+                color: #1e3a3c;
+            }
+            *:not(i) {
+                color: #1e3a3c;
+            }
+            .card {
+                position: relative;
+                display: flex;
+                flex-direction: column;
+                min-width: 0;
+                word-wrap: break-word;
+                background-clip: border-box;
+                border: 0 solid rgba(30, 58, 60,.125);
+                border-radius: 1rem;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="app" style="max-width: 1200px;margin: 0 auto;">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <!-- <div class="invoice-title">
+                                <h4 class="float-end font-size-15">
+                                    <span class="badge bg-success font-size-12 ms-2">{{project.status}}</span>
+                                </h4>
+                                <div class="mb-4">
+                                    <img class="logo" src="https://benfattoorganiza.com.br/wp-content/uploads/2018/02/logo-2018.fw_.png" alt="Benfatto Personal Organizer">
+                                </div>
+                                <div class="">
+                                    <p class="mb-1">Rua Madre Maria dos Anjos, 1084, Curitiba, PR</p>
+                                    <p class="mb-1">
+                                        <i class="uil uil-envelope-alt me-1"></i>
+                                        contato@benfattoorganiza.com.br</p>
+                                    <p>
+                                        <i class="uil uil-phone me-1"></i>
+                                        (41) 9 9995-3292</p>
+                                </div>
+                            </div>
+
+                            <hr class="my-4"> -->
+
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="">
+                                        <h5 class="font-size-16 mb-3" style="font-size:20px">{{ project.name }}</h5>
+                                        <h6 class="font-size-12 mb-1" style="font-size:18px">{{project.clientName}}</h6>
+                                        <p class="mb-0">{{project.clientPhone}}</p>
+                                        <p class="">{{project.clientEmail}}</p>
+                                    </div>
+                                </div>
+                                <!-- end col -->
+                                <div class="col-6">
+                                    <div class="text-end">
+                                        <h4 class="font-size-15 mb-3">
+                                            <span class="badge bg-success font-size-12 ms-2" style="font-size:16px">{{project.status}}</span>
+                                        </h4>
+                                        <!-- <div>
+                                            <h6 class="font-size-15 mb-1">Data de início:</h6>
+                                            <p>{{project.startDate}}</p>
+                                        </div>
+                                        <div class="mt-4">
+                                            <h6 class="font-size-15 mb-1">Data de finalização:</h6>
+                                            <p>{{project.endDate}}</p>
+                                        </div> -->
+                                        <div class="mt-4">
+                                            <h6 class="font-size-15 mb-1">Nº de diárias previstas:</h6>
+                                            <p>{{Math.round((teamHoursTotal / project.dailyJourneyTime * 100)) / 100}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- end col -->
+                            </div>
+                            <!-- end row -->
+
+                            <div class="py-2 mt-4">
+                                <h5 class="font-size-15">Equipe</h5>
+                                <div class="table-responsive">
+                                    <table class="table align-middle table-nowrap table-centered mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 70px;font-size: 14px">Nº</th>
+                                                <th style="font-size: 14px">Ambiente/Espaço</th>
+                                                <th class="text-end" style="font-size: 14px">Parceiro(a)</th>
+                                                <th class="text-end" style="font-size: 14px">Horas</th>
+                                                <th class="text-end" style="font-size: 14px">Valor</th>
+                                                <th class="text-end" style="width: 120px;font-size: 14px">Total</th>
+                                            </tr>
+                                        </thead>
+                                        <!-- end thead -->
+                                        <tbody>
+                                            <tr v-for="(contact, cIndex) in team">
+                                                <th scope="row">{{cIndex + 1}}</th>
+                                                <td>
+                                                    <div>
+                                                        <h6 class="text-truncate font-size-14 mb-1">{{contact.spaceName}} <small>({{contact.environmentName}})</small></h6>
+                                                    </div>
+                                                </td>
+                                                <td class="text-end">{{contact.name}} <small>({{contact.serviceType}})</small></td>
+                                                <td class="text-end">{{contact.serviceHours}}</td>
+                                                <td class="text-end">{{contact.price}}<small>/{{contact.priceType}}</small></td>
+                                                <td class="text-end">{{toMoney(clearNumber(contact.price) * contact.serviceHours)}}</td>
+                                            </tr>
+                                            <!-- end tr -->
+                                            <tr v-for="(contact, contactId) in teamById" :key="contactId">
+                                                <th scope="row" colspan="5" class="text-end border-0" style="font-size:14px">{{contact.name}} ({{contact.hours}} hora{{contact.hours > 1 ? 's' : ''}})</th>
+                                                <td class="text-end border-0" style="font-size:14px">{{toMoney(contact.value)}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row" colspan="5" class="text-end border-0">Subtotal</th>
+                                                <td class="text-end border-0">{{toMoney(teamTotal)}}</td>
+                                            </tr>
+                                            <!-- end tr -->
+                                        </tbody>
+                                        <!-- end tbody -->
+                                    </table>
+                                    <!-- end table -->
+                                </div>
+                                <h5 class="font-size-15 mt-4">Custos de atividades</h5>
+                                <div class="table-responsive">
+                                    <table class="table align-middle table-nowrap table-centered mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 70px;font-size: 14px;">Item</th>
+                                                <th style="font-size: 14px;">Descrição</th>
+                                                <th class="text-end" style="font-size: 14px;">Horas</th>
+                                                <th class="text-end" style="font-size: 14px;">Valor hora</th>
+                                                <th class="text-end" style="width: 120px;font-size: 14px;">Total</th>
+                                            </tr>
+                                        </thead>
+                                        <!-- end thead -->
+                                        <tbody>
+                                            <tr v-for="(variable, eIndex) in project.costActivityVariables">
+                                                <th scope="row">{{eIndex + 1}}</th>
+                                                <td>
+                                                    <div>
+                                                        <h6 class="text-truncate font-size-14 mb-1">{{variable.name}}</h6>
+                                                    </div>
+                                                </td>
+                                                <td class="text-end">{{variable.value}}</td>
+                                                <td class="text-end">{{toMoney(defaultHourPrice)}}</td>
+                                                <td class="text-end">{{toMoney(variable.value * 100)}}</td>
+                                            </tr>
+                                            <!-- end tr -->
+                                            <tr>
+                                                <th scope="row" colspan="4" class="text-end border-0">Subtotal</th>
+                                                <td class="text-end border-0">{{toMoney(costActivityVariablesTotal.toFixed(2))}}</td>
+                                            </tr>
+                                            <!-- end tr -->
+                                        </tbody>
+                                        <!-- end tbody -->
+                                    </table>
+                                    <!-- end table -->
+                                </div>
+                                <h5 class="font-size-15 mt-4">Custos dinâmicos</h5>
+                                <div class="table-responsive">
+                                    <table class="table align-middle table-nowrap table-centered mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 70px;font-size: 14px">Item</th>
+                                                <th style="font-size: 14px">Descrição</th>
+                                                <th class="text-end" style="font-size: 14px;">Valor diário</th>
+                                                <th class="text-end" style="font-size: 14px;">Dias</th>
+                                                <th class="text-end" style="width: 120px;font-size: 14px;">Total</th>
+                                            </tr>
+                                        </thead>
+                                        <!-- end thead -->
+                                        <tbody>
+                                            <tr v-for="(variable, eIndex) in project.costDinamicVariables">
+                                                <th scope="row">{{eIndex + 1}}</th>
+                                                <td>
+                                                    <div>
+                                                        <h6 class="text-truncate font-size-14 mb-1">{{variable.name}}</h6>
+                                                    </div>
+                                                </td>
+                                                <td class="text-end">{{variable.value}}</td>
+                                                <td class="text-end">{{Math.round((teamHoursTotal / project.dailyJourneyTime * 100)) / 100}}</td>
+                                                <td class="text-end">{{toMoney((clearNumber(variable.value) * (teamHoursTotal / project.dailyJourneyTime)).toFixed(2))}}</td>
+                                            </tr>
+                                            <!-- end tr -->
+                                            <tr>
+                                                <th scope="row" colspan="4" class="text-end border-0">Subtotal</th>
+                                                <td class="text-end border-0">{{toMoney(costDinamicVariablesTotal.toFixed(2))}}</td>
+                                            </tr>
+                                            <!-- end tr -->
+                                            <!-- end tr -->
+                                        </tbody>
+                                        <!-- end tbody -->
+                                    </table>
+                                    <!-- end table -->
+                                </div>
+                                <h5 class="font-size-15 mt-4">Custos de materiais</h5>
+                                <div class="table-responsive">
+                                    <table class="table align-middle table-nowrap table-centered mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 70px;font-size: 14px;">Item</th>
+                                                <th style="font-size: 14px;">Descrição</th>
+                                                <th class="text-end" style="font-size: 14px;">Quantidade</th>
+                                                <th class="text-end" style="font-size: 14px;">Preço unidade</th>
+                                                <th class="text-end" style="width: 120px;font-size: 14px;">Total</th>
+                                            </tr>
+                                        </thead>
+                                        <!-- end thead -->
+                                        <tbody>
+                                            <tr v-for="(variable, eIndex) in project.costMaterialVariables">
+                                                <th scope="row">{{eIndex + 1}}</th>
+                                                <td>
+                                                    <div>
+                                                        <h6 class="text-truncate font-size-14 mb-1">{{variable.name}}</h6>
+                                                    </div>
+                                                </td>
+                                                <td class="text-end">{{variable.quantity}}</td>
+                                                <td class="text-end">{{variable.value}}</td>
+                                                <td class="text-end">{{toMoney(clearNumber(variable.value) * variable.quantity)}}</td>
+                                            </tr>
+                                            <!-- end tr -->
+                                            <tr>
+                                                <th scope="row" colspan="4" class="text-end border-0">Subtotal</th>
+                                                <td class="text-end border-0">{{toMoney(costMaterialVariablesTotal.toFixed(2))}}</td>
+                                            </tr>
+                                            <!-- end tr -->
+                                        </tbody>
+                                        <!-- end tbody -->
+                                    </table>
+                                    <!-- end table -->
+                                </div>
+                                <!-- <h6 class="font-size-15">Custos dinâmicos</h6> -->
+                                <div class="table-responsive">
+                                    <table class="table align-middle table-nowrap table-centered mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 70px;font-size: 14px;"></th>
+                                                <th class="font-size: 14px;"></th>
+                                                <th class="text-end" style="width: 120px;font-size: 14px;"></th>
+                                            </tr>
+                                        </thead>
+                                        <!-- end thead -->
+                                        <tbody>
+                                            <!-- end tr -->
+                                            <tr>
+                                                <th scope="row" colspan="2" class="border-0 text-end">Total</th>
+                                                <td class="border-0 text-end" style="width:200px">
+                                                    <h4 class="m-0 fw-semibold">{{toMoney(dealTotal.toFixed(2))}}</h4>
+                                                </td>
+                                            </tr>
+                                            <!-- end tr -->
+                                        </tbody>
+                                        <!-- end tbody -->
+                                    </table>
+                                    <!-- end table -->
+                                </div>
+                                <!-- end table responsive -->
+                                <div class="d-print-none mt-4">
+                                    <div class="float-end">
+                                        <a href="javascript:window.print()" class="btn btn-success me-1">
+                                            <i class="fa fa-print"></i>
+                                            Imprimir
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end col -->
+            </div>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+        <script src="app.js"></script>
+        <script>
+            new Vue({
+                el: "#app",
+                data: {
+                    defaultHourPrice: 100,
+                    team: [],
+                    teamById: {},
+                    teamTotal: 0,
+                    teamHoursTotal: 0,
+                    teamPartnersHoursTotal: 0,
+                    variable1Total: 0,
+                    variable2Total: 0,
+                    variable3Total: 0,
+                    dealTotal: 0,
+                    costActivityVariablesTotal: 0,
+                    costMaterialVariablesTotal: 0,
+                    costDinamicVariablesTotal: 0,
+                    project: {},
+                },
+                created() {
+                    const projectsStore = JSON.parse(localStorage.getItem('PROJECTS'));
+                    const urlParams = new URLSearchParams(window.location.search);
+                    const projectId = urlParams.get('project_id');
+                    const project = projectsStore?.find(project => project.id === projectId);
+                    if (!project) {
+                        window.location.href = 'projects';
+                    }
+                    this.project = project;
+                    for (const environment of this.project.environments) {
+                        for (const space of environment.spaces) {
+                            // this.teamHoursTotal += space.contacts.reduce((max, contact) => {
+                            //     return contact.serviceHours > max ? contact.serviceHours : max;
+                            // }, -Infinity);
+                            for (const contact of space.contacts) {
+                                if (!this.teamById[contact.name]) {
+                                    this.teamById[contact.name] = {
+                                        name: contact.name,
+                                        value: 0,
+                                        hours: 0,
+                                    }
+                                }
+                                const contactValue = this.clearNumber(contact.price) * contact.serviceHours;
+                                this.teamById[contact.name].value += contactValue;
+                                this.teamById[contact.name].hours += contact.serviceHours;
+                                this.teamTotal += contactValue;
+                                this.teamHoursTotal += contact.serviceHours;
+                                if (contact.type === 'partner') {
+                                    this.teamPartnersHoursTotal += contact.serviceHours;
+                                }
+                                this.team.push({
+                                    name: contact.name,
+                                    environmentName: environment.name,
+                                    spaceName: space.name,
+                                    serviceType: contact.serviceType,
+                                    serviceHours: contact.serviceHours,
+                                    priceType: contact.priceType,
+                                    price: contact.price,
+                                })
+                            }
+                        }
+                    }
+                    for (const variable of this.project.costMaterialVariables) {
+                        this.costMaterialVariablesTotal += this.clearNumber(variable.value) * variable.quantity;
+                    }
+                    for (const variable of this.project.costActivityVariables) {
+                        this.costActivityVariablesTotal += variable.value * this.defaultHourPrice;
+                        this.teamHoursTotal += variable.value;
+                    }
+                    for (const variable of this.project.costDinamicVariables) {
+                        this.costDinamicVariablesTotal += this.clearNumber(variable.value) * (this.teamHoursTotal / this.project.dailyJourneyTime);
+                    }
+                    this.dealTotal = this.teamTotal + this.costDinamicVariablesTotal + this.costMaterialVariablesTotal + this.costActivityVariablesTotal;
+                },
+                methods: {
+                    clearNumber(number) {
+                        return Number(number.replace(/[^\d,-]/g, '').replace(',', '.'));
+                    },
+                    toMoney(number) {
+                        return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(number);
+                    },
+                },
+            });
+        </script>
+    </body>
+</html>
