@@ -5,13 +5,13 @@
     "description": "Gerencie projetos de organização",
     "start_url": "/",
     "scope": "/",
-    "display": "standalone",
+    "display": "fullscreen",
     "theme_color": "#1e3a3c",
     "background_color": "#1e3a3c",
-    "orientation": "vertical",
+    "orientation": "portrait",
     "icons": [
         {
-            "src": "/icon512.png",
+            "src": "/icon-512.png",
             "sizes": "512x512"
         }
     ]
