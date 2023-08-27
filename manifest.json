@@ -5,7 +5,7 @@
     "description": "Gerencie projetos de organização",
     "start_url": "/",
     "scope": "/",
-    "display": "fullscreen",
+    "display": "standalone",
     "theme_color": "#1e3a3c",
     "background_color": "#1e3a3c",
     "orientation": "portrait",
