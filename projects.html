@@ -8,7 +8,7 @@
         <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;600&display=swap" rel="stylesheet">
         <link href="/app.css" rel="stylesheet">
         <link rel="manifest" href="/manifest.json">
-        <meta name="theme-color" content="#1e3a3c" />
+        <meta name="theme-color" content="#64c2c7" />
         <title>Projetos Ozapp</title>
     </head>
     <body>
@@ -42,9 +42,9 @@
                 <tbody>
                     <tr>
                         <td v-for="(project, index) in projects" @click="goToProject(project.id)">
-                            <a style="text-decoration: none;color:var(--color-secondary)">
-                                <h2 style="font-size:18px;margin:0">{{project.name}}</h2>
-                                <span style="margin:0">Cliente: {{project.clientName}}</span>
+                            <a style="text-decoration: none;">
+                                <h2 style="font-size:18px;margin:0;color:#326164">{{project.name}}</h2>
+                                <span style="margin:0;color:rgba(50, 97, 100, .7);">Cliente: {{project.clientName}}</span>
                             </a>
                         </td>
                     </tr>
@@ -60,6 +60,7 @@
                 data: {
                     loading: false,
                     projects: [],
+                    user: {},
                 },
                 methods: {
                     goToProject(projectId) {
@@ -67,9 +68,16 @@
                     },
                 },
                 created() {
+                    this.user = JSON.parse(localStorage.getItem('USER'));
+                    if (!this.user) {
+                        window.location.href = '/login';
+                    }
                     let projectsStore = JSON.parse(localStorage.getItem("PROJECTS"));
                     if (!projectsStore || !projectsStore.length) {
-                        projectsStore = [PROJECT_DEMO];
+                        projectsStore = [{
+                            ...PROJECT_DEMO,
+                            defaultHourPrice: this.user.defaultHourPrice ? this.user.defaultHourPrice : 'R$ 100',
+                        }];
                         localStorage.setItem('PROJECTS', JSON.stringify(projectsStore));
                     }
                     this.projects = projectsStore;

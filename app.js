@@ -22,16 +22,35 @@ function openTab(evt, tabName) {
   tab.style.setProperty("--progress-width", (progressPercent + 2) + "%");
 }
 
+function toggleSection(e) {
+    const allButtons = document.getElementsByClassName('collapsible');
+    const allContents = document.getElementsByClassName('content');
+    for(let button of allButtons) {
+        button.classList.remove('active');
+    }
+    for(let content of allContents) {
+        content.style.maxHeight = null;
+    }
+    const content = e.nextElementSibling;
+    if (content.style.maxHeight){
+        content.style.maxHeight = null;
+    } else {
+        content.style.maxHeight = content.scrollHeight + "px";
+        e.classList.add('active');
+    } 
+}
+
 const PROJECT_DEMO = {
     id: 'ZocS2K2mLgtYho_u2vJob',
     businessName: 'Benfatto Organiza',
     name: 'Projeto demonstrativo',
-    status: 'Aprovado',
+    status: 'Pendente',
     clientName: 'Irene Loureiro',
     clientPhone: '1137746606',
     clientEmail: 'contato@organizesuavida.com.br',
     employeeName: '',
     dailyJourneyTime: 7,
+    defaultHourPrice: 'R$ 100',
     creationDate: '30/07/2023 13:30',
     startDate: '01/08/2023 13:00',
     endDate: '03/08/2023 18:00',
@@ -113,139 +132,39 @@ const PROJECT_DEMO = {
             value: 1,
         },
     ],
-    environments: [
+    spaces: [
         {
-            name: 'Quarto casal',
-            description: '',
-            checklist: [
+            id: 'L40Dg8ackavUxO81JDF0Y',
+            name: 'Closet',
+            contacts: [
                 {
-                    name: 'Item 1',
-                    checked: true,
+                    id: '8OWnMu80Bohw4ZYSISmqW',
+                    userId: '',
+                    name: 'Irene Loureiro',
+                    serviceType: 'Presencial',
+                    priceType: 'Hora',
+                    serviceHours: 10,
+                    price: 'R$ 100,00',
+                    startAt: '00/00/00 00:00',
+                    endAt: '00/00/00 00:00',
+                    startedAt: '00/00/00 00:00',
+                    endedAt: '00/00/00 00:00',
                 },
-                {
-                    name: 'Item 1',
-                    checked: true,
-                },
-                {
-                    name: 'Item 1',
-                    checked: true,
-                },
-                {
-                    name: 'Item 1',
-                    checked: false,
-                },
-                {
-                    name: 'Item 1',
-                    checked: false,
-                },
-            ],
-            spaces: [
-                {
-                    id: 'L40Dg8ackavUxO81JDF0Y',
-                    name: 'Closet',
-                    contacts: [
-                        {
-                            id: '8OWnMu80Bohw4ZYSISmqW',
-                            userId: '',
-                            name: 'Irene Loureiro',
-                            serviceType: 'Presencial',
-                            priceType: 'Hora',
-                            serviceHours: 10,
-                            price: 'R$ 100,00',
-                            startAt: '00/00/00 00:00',
-                            endAt: '00/00/00 00:00',
-                            startedAt: '00/00/00 00:00',
-                            endedAt: '00/00/00 00:00',
-                        },
-                        {
-                            id: 'tgCmceEmdtORwKbUOg6SU',
-                            userId: '',
-                            name: 'Suzana Ribeiro',
-                            type: 'partner',
-                            serviceType: 'Presencial',
-                            priceType: 'Hora',
-                            serviceHours: 10,
-                            price: 'R$ 100,00',
-                            startAt: '00/00/00 00:00',
-                            endAt: '00/00/00 00:00',
-                            startedAt: '00/00/00 00:00',
-                            endedAt: '00/00/00 00:00',
-                        }
-                    ]
-                },
-            ],
-        },
-        {
-            name: 'Quarto infantil',
-            description: '',
-            checklist: [
-                {
-                    name: 'Item 1',
-                    checked: true,
-                },
-                {
-                    name: 'Item 1',
-                    checked: true,
-                },
-                {
-                    name: 'Item 1',
-                    checked: true,
-                },
-                {
-                    name: 'Item 1',
-                    checked: false,
-                },
-                {
-                    name: 'Item 1',
-                    checked: false,
-                },
-            ],
-            spaces: [
-                {
-                    id: 'c9kdLMSKvBe2L6zS8vur_',
-                    name: 'Closet',
-                    contacts: [
-                        {
-                            id: 'hBEehvEvExa7dci26winB',
-                            name: 'Irene Loureiro',
-                            serviceType: 'Presencial',
-                            priceType: 'Hora',
-                            serviceHours: 10,
-                            price: 'R$ 100,00',
-                            startAt: '00/00/00 00:00',
-                            endAt: '00/00/00 00:00',
-                            startedAt: '00/00/00 00:00',
-                            endedAt: '00/00/00 00:00',
-                        },
-                        {
-                            id: 'rHotXRLibwzxfNZ9lqGZR',
-                            name: 'Suzana Ribeiro',
-                            type: 'partner',
-                            serviceType: 'Presencial',
-                            priceType: 'Hora',
-                            serviceHours: 10,
-                            price: 'R$ 100,00',
-                            startAt: '00/00/00 00:00',
-                            endAt: '00/00/00 00:00',
-                            startedAt: '00/00/00 00:00',
-                            endedAt: '00/00/00 00:00',
-                        }
-                    ]
-                },
-            ],
+            ]
         },
     ],
 };
 
 const PROJECT_BLANK = {
     businessName: '',
-    name: 'Nome do projeto',
+    name: '',
     status: '',
-    clientName: 'Nome do cliente',
+    clientName: '',
     clientPhone: '',
     clientEmail: '',
     employeeName: '',
     dailyJourneyTime: 7,
+    defaultHourPrice: 'R$ 100',
     creationDate: '',
     startDate: '',
     endDate: '',
@@ -327,5 +246,5 @@ const PROJECT_BLANK = {
             value: 1,
         },
     ],
-    environments: [],
+    spaces: [],
 };

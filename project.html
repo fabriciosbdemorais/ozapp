@@ -8,7 +8,7 @@
         <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;600&display=swap" rel="stylesheet">
         <link href="/app.css" rel="stylesheet">
         <link rel="manifest" href="/manifest.json">
-        <meta name="theme-color" content="#1e3a3c" />
+        <meta name="theme-color" content="#64c2c7" />
         <title>Editar projeto | Ozapp</title>
     </head>
     <body>
@@ -46,8 +46,8 @@
         <main id="app" class="page-content" :class="{ 'loading': loading }">
             <div class="page-header">
                 <div>
-                    <h1>{{ project.name }}&nbsp;</h1>
-                    <p>{{project.clientName}}&nbsp;</p>
+                    <h1 class="lazy-content">{{ project.name ? project.name : '-' }}&nbsp;</h1>
+                    <p class="lazy-content">Cliente: {{project.clientName ? project.clientName : '-'}}&nbsp;</p>
                 </div>
                 <button class="btn btn-save" @click="onSaveProject">
                     <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V173.3c0-17-6.7-33.3-18.7-45.3L352 50.7C340 38.7 323.7 32 306.7 32H64zm0 96c0-17.7 14.3-32 32-32H288c17.7 0 32 14.3 32 32v64c0 17.7-14.3 32-32 32H96c-17.7 0-32-14.3-32-32V128zM224 288a64 64 0 1 1 0 128 64 64 0 1 1 0-128z"/></svg>
@@ -61,7 +61,7 @@
                         <span>Definições gerais</span>
                     </button>
                     <button onclick="openTab(event, 'Tab2')" class="tab-links">
-                        <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewbox="0 0 512 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"/></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM184 296c0 13.3 10.7 24 24 24s24-10.7 24-24V232h64c13.3 0 24-10.7 24-24s-10.7-24-24-24H232V120c0-13.3-10.7-24-24-24s-24 10.7-24 24v64H120c-13.3 0-24 10.7-24 24s10.7 24 24 24h64v64z"/></svg>
                         <span>Levantamento técnico</span>
                     </button>
                     <button onclick="openTab(event, 'Tab3')" class="tab-links">
@@ -109,6 +109,11 @@
                                 <div class="field">
                                     <input type="number" id="daily-journey-time" v-model="project.dailyJourneyTime" @change="validateDailyJourneyTime" placeholder=" ">
                                     <label for="daily-journey-time">Horas disponíveis por dia</label>
+                                    <span class="focus-bg"></span>
+                                </div>
+                                <div class="field">
+                                    <input type="text" id="default-hour-price" v-model="project.defaultHourPrice" v-money="moneyOptions" placeholder=" ">
+                                    <label for="default-hour-price">Valor por hora para atividades</label>
                                     <span class="focus-bg"></span>
                                 </div>
                                 <!-- <div class="field">
@@ -170,54 +175,23 @@
                 <div id="Tab2" class="tab-content">
                     <div class="tab-header">
                         <h2>Levantamento técnico</h2>
-                        <button class="btn btn-small" @click="addEnvironment" style="align-self: flex-end;">
+                        <button class="btn btn-small" @click="addSpace" style="align-self: flex-end;">
                             <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"/></svg>
-                            <span>Ambiente</span>
+                            <span>Espaço</span>
                         </button>
                     </div>
                     <div class="content-groups">
-                        <div class="content-group" v-for="(environment, eIndex) in project.environments">
-                            <label class="content-group-label">Ambiente</label>
+                        <div class="content-group" v-for="(space, sIndex) in project.spaces" style="padding:0">
                             <div class="field">
-                                <input required type="text" :id="`env${eIndex}-name`" v-model="environment.name" placeholder=" ">
-                                <label :for="`env${eIndex}-name`">Nome do ambiente</label>
+                                <input required type="text" :id="`space${sIndex}-name`" v-model="space.name" placeholder=" " @focus="setCurrentFieldsBlock(space.id)">
+                                <label :for="`space${sIndex}-name`">Nome do espaço</label>
                                 <span class="focus-bg"></span>
                             </div>
-                            <div class="field">
-                                <textarea :id="`env${eIndex}-description`" rows="2" v-model="environment.description" placeholder=" "></textarea>
-                                <label :for="`env${eIndex}-description`">Descrição do ambiente</label>
-                                <div class="focus-bg"></div>
-                            </div>
-                            <!-- <div class="checkbox-group">
-                                <div class="checkbox" v-for="(checklistItem, checklistItemIndex) in environment.checklist">
-                                    <input type="checkbox" :id="`env${eIndex}-checklistitem${checklistItemIndex}`" v-model="checklistItem.checked">
-                                    <label :for="`env${eIndex}-checklistitem${checklistItemIndex}`">{{checklistItem.name}}</label>
-                                </div>
-                            </div> -->
-                            <div style="display: flex;justify-content:flex-end;align-items: center;gap: 1em">
-                                <button class="btn btn-small btn-warning" @click="removeEnvironment(environment, project.environments, eIndex)" style="align-self: flex-end">
+                            <div :class="{hidden: currentFieldsBlockId !== space.id}" class="collapsed-fields" @click.self="clearCurrentFieldsBlock">
+                                <button class="btn btn-small btn-warning" @click="removeSpace(space, project.spaces, index)" style="margin-bottom: 1em; align-self: center">
                                     <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"/></svg>
-                                    <span>Remover ambiente</span>
+                                    <span>Remover espaço</span>
                                 </button>
-                                <button class="btn btn-small" @click="addSpace(environment)" style="align-self: flex-end;">
-                                    <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"/></svg>
-                                    <span>Espaço</span>
-                                </button>
-                            </div>
-                            <div class="content-groups">
-                                <div class="content-group" v-for="(space, sIndex) in environment.spaces" style="padding:0">
-                                    <div class="field">
-                                        <input required type="text" :id="`env${eIndex}-space${sIndex}-name`" v-model="space.name" placeholder=" " @focus="setCurrentFieldsBlock(space.id)">
-                                        <label :for="`env${eIndex}-space${sIndex}-name`">Nome do espaço</label>
-                                        <span class="focus-bg"></span>
-                                    </div>
-                                    <div :class="{hidden: currentFieldsBlockId !== space.id}" class="collapsed-fields">
-                                        <button class="btn btn-small btn-warning" @click="removeSpace(space, environment.spaces, index)" style="margin-bottom: 1em; align-self: center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512">! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc.<path d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"/></svg>
-                                            <span>Remover espaço</span>
-                                        </button>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -225,9 +199,9 @@
                 <div id="Tab3" class="tab-content">
                     <div class="tab-header">
                         <h2>Proposta comercial</h2>
-                        <a class="btn btn-small" :href="'print-deal?project_id='+project.id" target="_blank">
-                            <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 384 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M64 0C28.7 0 0 28.7 0 64V448c0 35.3 28.7 64 64 64H320c35.3 0 64-28.7 64-64V64c0-35.3-28.7-64-64-64H64zM96 64H288c17.7 0 32 14.3 32 32v32c0 17.7-14.3 32-32 32H96c-17.7 0-32-14.3-32-32V96c0-17.7 14.3-32 32-32zm32 160a32 32 0 1 1 -64 0 32 32 0 1 1 64 0zM96 352a32 32 0 1 1 0-64 32 32 0 1 1 0 64zM64 416c0-17.7 14.3-32 32-32h96c17.7 0 32 14.3 32 32s-14.3 32-32 32H96c-17.7 0-32-14.3-32-32zM192 256a32 32 0 1 1 0-64 32 32 0 1 1 0 64zm32 64a32 32 0 1 1 -64 0 32 32 0 1 1 64 0zm64-64a32 32 0 1 1 0-64 32 32 0 1 1 0 64zm32 64a32 32 0 1 1 -64 0 32 32 0 1 1 64 0zM288 448a32 32 0 1 1 0-64 32 32 0 1 1 0 64z"/></svg>
-                            <span>Calcular</span>
+                        <a class="btn btn-small" :href="'/print-deal?project_id='+project.id" target="_blank" @click="saveProject">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zM432 248a24 24 0 1 1 0 48 24 24 0 1 1 0-48z"/></svg>
+                            <span>Imprimir</span>
                         </a>
                     </div>
                     <div class="deal-categories">
@@ -238,6 +212,11 @@
                                 </button>
                             </li>
                             <li>
+                                <button @click="openCalc">
+                                    <img src="/img/ozcalc.svg" width="75" alt="OZ! Calc" style="margin-bottom: -12px">
+                                </button>
+                            </li>
+                            <li>
                                 <button :class="{ 'active': tabDealCurrent === 'variables' }" @click="setTabDeal('variables')">
                                     Custos
                                 </button>
@@ -245,53 +224,48 @@
                         </ul>
                     </div>
                     <div class="content-groups" :class="{ 'hidden': tabDealCurrent !== 'team' }">
-                        <div class="content-group" v-for="(environment, eIndex) in project.environments">
-                            <label class="content-group-label">{{environment.name}}</label>
+                        <div class="content-group" v-for="(space, sIndex) in project.spaces">
+                            <label class="content-group-label">{{space.name}}</label>
+                            <button class="btn btn-small" @click="addContact(space)" style="margin-bottom: 1em;align-self: flex-start">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"/></svg>
+                                <span>Adicionar PO</span>
+                            </button>
                             <div class="content-groups">
-                                <div class="content-group" v-for="(space, sIndex) in environment.spaces">
-                                    <label class="content-group-label">{{space.name}}</label>
-                                    <button class="btn btn-small" @click="addContact(space)" style="margin-bottom: 1em;align-self: flex-start">
-                                        <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"/></svg>
-                                        <span>Adicionar PO</span>
-                                    </button>
-                                    <div class="content-groups">
-                                        <div class="content-group" v-for="(contact, cIndex) in space.contacts" style="padding:0;gap:0;">
-                                            <div class="field">
-                                                <input required type="text" :id="`env${eIndex}-space${sIndex}-contact${cIndex}-name`" v-model="contact.name" placeholder=" " @focus="setCurrentFieldsBlock(contact.id)">
-                                                <label :for="`env${eIndex}-space${sIndex}-contact${cIndex}-name`">Personal Organizer</label>
-                                                <span class="focus-bg"></span>
-                                            </div>
-                                            <div :class="{hidden: currentFieldsBlockId !== contact.id}" class="collapsed-fields">
-                                                <div class="field">
-                                                    <select :id="`env${eIndex}-space${sIndex}-contact${cIndex}-servicetype`" v-model="contact.serviceType">
-                                                        <option value="Presencial">Presencial</option>
-                                                        <option value="Online">Online</option>
-                                                    </select>
-                                                    <label :for="`env${eIndex}-space${sIndex}-contact${cIndex}-servicetype`">Modalidade</label>
-                                                </div>
-                                                <!-- <div class="field">
-                                                    <select :id="`env${eIndex}-space${sIndex}-contact${cIndex}-pricetype`" v-model="contact.priceType">
-                                                        <option value="Fixo">Fixo</option>
-                                                        <option value="Hora">Hora</option>
-                                                    </select>
-                                                    <label :for="`env${eIndex}-space${sIndex}-contact${cIndex}-pricetype`">Tipo de valor</label>
-                                                </div> -->
-                                                <div class="field">
-                                                    <input type="number" :id="`env${eIndex}-space${sIndex}-contact${cIndex}-servicehours`" v-model="contact.serviceHours" placeholder=" ">
-                                                    <label :for="`env${eIndex}-space${sIndex}-contact${cIndex}-servicehours`">Quantidade de horas</label>
-                                                    <span class="focus-bg"></span>
-                                                </div>
-                                                <div class="field">
-                                                    <input type="tel" :id="`env${eIndex}-space${sIndex}-contact${cIndex}-price`" v-model.lazy="contact.price" v-money="moneyOptions" placeholder=" ">
-                                                    <label :for="`env${eIndex}-space${sIndex}-contact${cIndex}-price`">Valor/Hora</label>
-                                                    <span class="focus-bg"></span>
-                                                </div>
-                                                <button class="btn btn-small btn-warning" @click="removeContact(contact, space.contacts, index)" style="margin: 1em; align-self: center">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc.--><path d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"/></svg>
-                                                    <span>Remover PO</span>
-                                                </button>
-                                            </div>
+                                <div class="content-group" v-for="(contact, cIndex) in space.contacts" style="padding:0;gap:0;">
+                                    <div class="field">
+                                        <input required type="text" :id="`space${sIndex}-contact${cIndex}-name`" v-model="contact.name" placeholder=" " @focus="setCurrentFieldsBlock(contact.id)">
+                                        <label :for="`space${sIndex}-contact${cIndex}-name`">Personal Organizer</label>
+                                        <span class="focus-bg"></span>
+                                    </div>
+                                    <div :class="{hidden: currentFieldsBlockId !== contact.id}" class="collapsed-fields" @click.self="clearCurrentFieldsBlock">
+                                        <div class="field">
+                                            <select :id="`space${sIndex}-contact${cIndex}-servicetype`" v-model="contact.serviceType">
+                                                <option value="Presencial">Presencial</option>
+                                                <option value="Online">Online</option>
+                                            </select>
+                                            <label :for="`space${sIndex}-contact${cIndex}-servicetype`">Modalidade</label>
                                         </div>
+                                        <!-- <div class="field">
+                                            <select :id="`env${eIndex}-space${sIndex}-contact${cIndex}-pricetype`" v-model="contact.priceType">
+                                                <option value="Fixo">Fixo</option>
+                                                <option value="Hora">Hora</option>
+                                            </select>
+                                            <label :for="`env${eIndex}-space${sIndex}-contact${cIndex}-pricetype`">Tipo de valor</label>
+                                        </div> -->
+                                        <div class="field">
+                                            <input type="number" :id="`space${sIndex}-contact${cIndex}-servicehours`" v-model="contact.serviceHours" placeholder=" ">
+                                            <label :for="`space${sIndex}-contact${cIndex}-servicehours`">Quantidade de horas</label>
+                                            <span class="focus-bg"></span>
+                                        </div>
+                                        <div class="field">
+                                            <input type="tel" :id="`space${sIndex}-contact${cIndex}-price`" v-model.lazy="contact.price" v-money="moneyOptions" placeholder=" ">
+                                            <label :for="`space${sIndex}-contact${cIndex}-price`">Valor/Hora</label>
+                                            <span class="focus-bg"></span>
+                                        </div>
+                                        <button class="btn btn-small btn-warning" @click="removeContact(contact, space.contacts, index)" style="margin: 1em; align-self: center">
+                                            <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc.--><path d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"/></svg>
+                                            <span>Remover PO</span>
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -446,10 +420,11 @@
                     </div>
                 </div> -->
             </div>
-            <p style="text-align: center;"><small>Ozapp v1.0.0 Beta</small></p>
+            <p style="text-align: center;" class="app-info"><small>Ozapp v1.0.0 Beta</small></p>
         </main>
         <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/v-money@0.8.1/dist/v-money.min.js"></script>
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
         <script src="app.js"></script>
         <script>
             new Vue({
@@ -458,7 +433,6 @@
                     loading: true,
                     tabDealCurrent: 'team',
                     currentFieldsBlockId: '',
-                    currentFieldsBlockNext: false,
                     moneyOptions: {
                         decimal: ',',
                         thousands: '.',
@@ -466,9 +440,25 @@
                         precision: 2,
                         masked: false,
                     },
+                    user: {},
                     project: {},
+                    team: [],
+                    teamById: {},
+                    teamTotal: 0,
+                    teamHoursTotal: 0,
+                    teamPartnersHoursTotal: 0,
+                    dealTotal: 0,
+                    costActivityVariablesTotal: 0,
+                    costMaterialVariablesTotal: 0,
+                    costDinamicVariablesTotal: 0,
+                    calcModal: '',
                 },
                 created() {
+                    document.getElementById('app').classList.add('loaded');
+                    this.user = JSON.parse(localStorage.getItem('USER'));
+                    if (!this.user) {
+                        window.location.href = '/login';
+                    }
                     const projectsStore = JSON.parse(localStorage.getItem("PROJECTS"));
                     const urlParams = new URLSearchParams(window.location.search);
                     const projectId = urlParams.get('project_id');
@@ -478,10 +468,18 @@
                     if (!project && !isProjectNew) {
                         window.location.href = '/projects';
                     }
-                    this.project = project ? project : {id: this.uuidv4(), ...PROJECT_BLANK};
+                    this.project = project ? project : {
+                        ...PROJECT_BLANK,
+                        id: this.uuidv4(),
+                        defaultHourPrice: this.user.defaultHourPrice ? this.user.defaultHourPrice : 'R$ 100',
+                    };
                 },
                 methods: {
                     onSaveProject() {
+                        this.saveProject();
+                        swal('Projeto salvo com sucesso!', '', 'success');
+                    },
+                    saveProject() {
                         const projectsStore = JSON.parse(localStorage.getItem("PROJECTS"));
                         const urlParams = new URLSearchParams(window.location.search);
                         const projectId = urlParams.get('project_id');
@@ -492,34 +490,27 @@
                             projectsStore.unshift(this.project);
                         }
                         localStorage.setItem('PROJECTS', JSON.stringify(projectsStore));
-                        alert('Projeto salvo com sucesso!');
                     },
                     setTabDeal(view) {
                         this.tabDealCurrent = view;
                     },
-                    addEnvironment() {
-                        this.project.environments.unshift({
+                    addSpace() {
+                        this.project.spaces.unshift({
                             id: this.uuidv4(),
-                            name: 'Ambiente ' + (this.project.environments.length + 1),
-                            spaces: [],
-                        });
-                    },
-                    addSpace(environment) {
-                        environment.spaces.unshift({
-                            id: this.uuidv4(),
-                            name: 'Espaço ' + (environment.spaces.length + 1),
+                            name: 'Espaço ' + (this.project.spaces.length + 1),
                             contacts: [],
                         });
                     },
                     addContact(space) {
-                        const userStore = JSON.parse(localStorage.getItem("USER"));
+                        const id = this.uuidv4();
+                        this.currentFieldsBlockId = id;
                         space.contacts.unshift({
-                            id: this.uuidv4(),
-                            name: '',
+                            id,
+                            name: this.user.name,
                             serviceType: 'Presencial',
                             priceType: 'Hora',
                             serviceHours: 1,
-                            price: userStore ? userStore.defaultHourPrice : 'R$ 100,00',
+                            price: this.user.defaultHourPrice ? this.user.defaultHourPrice : 'R$ 100',
                         });
                     },
                     addCostDinamic() {
@@ -551,60 +542,258 @@
                             this.project.dailyJourneyTime = 24;
                         }
                     },
-                    removeEnvironment(environment, environments, index) {
-                        if (window.confirm(`Deseja realmente excluir o ambiente ${environment.name}? Todos os dados deste ambiente serão apagados`)) {
-                            environments.splice(index, 1);
-                        }
-                    },
                     removeSpace(space, spaces, index) {
-                        if (window.confirm(`Deseja realmente excluir o espaço ${space.name}? Todos os dados deste espaço serão apagados`)) {
-                            spaces.splice(index, 1);
-                        }
+                        swal({
+                            title: 'Remover espaço',
+                            text: `Esta ação vai remover o espaço ${space.name}.`,
+                            icon: 'warning',
+                            buttons: true,
+                            dangerMode: true,
+                        })
+                        .then((confirm) => {
+                            if (confirm) {
+                                spaces.splice(index, 1);
+                            }
+                        });
                     },
                     removeContact(contact, contacts, index) {
-                        if (window.confirm(`Deseja realmente excluir o espaço ${contact.name}? Todos os dados desta personal organizer serão apagados`)) {
-                            contacts.splice(index, 1);
-                        }
+                        swal({
+                            title: 'Remover PO',
+                            text: `Esta ação vai remover a (o) Personal Organizer ${contact.name}.`,
+                            icon: 'warning',
+                            buttons: true,
+                            dangerMode: true,
+                        })
+                        .then((confirm) => {
+                            if (confirm) {
+                                contacts.splice(index, 1);
+                            }
+                        });
                     },
                     removeCostDinamic(variable, variables, index) {
-                        if (window.confirm(`Deseja realmente excluir o custo dinâmico ${variable.name}? Todos os dados desta variável serão apagados`)) {
-                            variables.splice(index, 1);
-                        }
+                        swal({
+                            title: 'Remover custo',
+                            text: `Esta ação vai remover o custo dinâmico ${variable.name}.`,
+                            icon: 'warning',
+                            buttons: true,
+                            dangerMode: true,
+                        })
+                        .then((confirm) => {
+                            if (confirm) {
+                                variables.splice(index, 1);
+                            }
+                        });
                     },
                     removeCostMaterial(variable, variables, index) {
-                        if (window.confirm(`Deseja realmente excluir o custo de material ${variable.name}? Todos os dados deste material serão apagados`)) {
-                            variables.splice(index, 1);
-                        }
+                        swal({
+                            title: 'Remover custo',
+                            text: `Esta ação vai remover o custo de material ${variable.name}.`,
+                            icon: 'warning',
+                            buttons: true,
+                            dangerMode: true,
+                        })
+                        .then((confirm) => {
+                            if (confirm) {
+                                variables.splice(index, 1);
+                            }
+                        });
                     },
                     removeCostActivity(variable, variables, index) {
-                        if (window.confirm(`Deseja realmente excluir o custo de atividade ${variable.name}? Todos os dados desta atividade serão apagados`)) {
-                            variables.splice(index, 1);
-                        }
+                        swal({
+                            title: 'Remover custo',
+                            text: `Esta ação vai remover o custo de atividade ${variable.name}.`,
+                            icon: 'warning',
+                            buttons: true,
+                            dangerMode: true,
+                        })
+                        .then((confirm) => {
+                            if (confirm) {
+                                variables.splice(index, 1);
+                            }
+                        });
                     },
                     deleteProject() {
-                        if (window.confirm(`Deseja realmente excluir o projeto ${this.project.name}? Todos os dados deste projeto serão apagados`)) {
-                            const projectsStore = JSON.parse(localStorage.getItem("PROJECTS"));
-                            const urlParams = new URLSearchParams(window.location.search);
-                            const projectId = urlParams.get('project_id');
-                            if (projectId) {
-                                const projectIndex = projectsStore.findIndex(project => project.id === projectId);
-                                projectsStore.splice(projectIndex, 1);
-                            } else { 
+                        swal({
+                            title: 'Remover projeto',
+                            text: `Esta ação vai remover o projeto ${this.project.name}.`,
+                            icon: 'warning',
+                            buttons: true,
+                            dangerMode: true,
+                        })
+                        .then((confirm) => {
+                            if (confirm) {
+                                const projectsStore = JSON.parse(localStorage.getItem("PROJECTS"));
+                                const urlParams = new URLSearchParams(window.location.search);
+                                const projectId = urlParams.get('project_id');
+                                if (projectId) {
+                                    const projectIndex = projectsStore.findIndex(project => project.id === projectId);
+                                    projectsStore.splice(projectIndex, 1);
+                                } else { 
+                                    window.location.href = '/projects';
+                                }
+                                localStorage.setItem('PROJECTS', JSON.stringify(projectsStore));
                                 window.location.href = '/projects';
                             }
-                            localStorage.setItem('PROJECTS', JSON.stringify(projectsStore));
-                            alert('Projeto excluído com sucesso!');
-                            window.location.href = '/projects';
-                        }
+                        });
                     },
                     setCurrentFieldsBlock(blockId) {
                         this.currentFieldsBlockId = blockId;
+                    },
+                    clearCurrentFieldsBlock() {
+                        this.currentFieldsBlockId = '';
+                    },
+                    openCalc() {
+                        this.calc();
+                        swal({
+                            buttons: {
+                                roll: {
+                                    text: 'Versão para impressão',
+                                    value: 'print',
+                                },
+                                cancel: 'Sair',
+                            },
+                            content: {
+                                element: "div",
+                                attributes: {
+                                    innerHTML: this.calcModal,
+                                },
+                            },
+                        })
+                        .then((value) => {
+                            if (value === 'print') {
+                                this.saveProject();
+                                window.open('/print-deal?project_id=' + this.project.id, '_blank').focus();
+                            }
+                        });
                     },
                     uuidv4() {
                         return ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c =>
                             (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
                         );
                     },
+                    clearNumber(number) {
+                        return Number(number.replace(/[^\d,-]/g, '').replace(',', '.'));
+                    },
+                    toMoney(number) {
+                        return new Intl.NumberFormat('pt-BR', {
+                            style: 'currency',
+                            currency: 'BRL'
+                        }).format(number);
+                    },
+                    calc() {
+                        this.teamById = {};
+                        this.team = [];
+                        this.teamHoursTotal = 0;
+                        this.teamTotal = 0;
+                        this.costMaterialVariablesTotal = 0;
+                        this.costActivityVariablesTotal = 0;
+                        this.costDinamicVariablesTotal = 0;
+                        this.teamPartnersHoursTotal = 0;
+                        this.dealTotal = 0;
+                        for (const space of this.project.spaces) {
+                            for (const contact of space.contacts) {
+                                if (!this.teamById[contact.name]) {
+                                    this.teamById[contact.name] = {
+                                        name: contact.name,
+                                        value: 0,
+                                        hours: 0
+                                    }
+                                }
+                                const contactValue = this.clearNumber(contact.price) * Number(contact.serviceHours);
+                                this.teamById[contact.name].value += contactValue;
+                                this.teamById[contact.name].hours += Number(contact.serviceHours);
+                                this.teamTotal += contactValue;
+                                this.teamHoursTotal += Number(contact.serviceHours);
+                                if (contact.type === 'partner') {
+                                    this.teamPartnersHoursTotal += Number(contact.serviceHours);
+                                }
+                                this.team.push({
+                                    name: contact.name,
+                                    spaceName: space.name,
+                                    serviceType: contact.serviceType,
+                                    serviceHours: Number(contact.serviceHours),
+                                    priceType: contact.priceType,
+                                    price: contact.price
+                                })
+                            }
+                        }
+                        for (const variable of this.project.costMaterialVariables) {
+                            this.costMaterialVariablesTotal += this.clearNumber(variable.value) * variable.quantity;
+                        }
+                        for (const variable of this.project.costActivityVariables) {
+                            this.costActivityVariablesTotal += variable.value * this.clearNumber(this.project.defaultHourPrice);
+                            this.teamHoursTotal += variable.value;
+                        }
+                        for (const variable of this.project.costDinamicVariables) {
+                            this.costDinamicVariablesTotal += this.clearNumber(variable.value) * (this.teamHoursTotal / this.project.dailyJourneyTime);
+                        }
+                        this.dealTotal = this.teamTotal + this.costDinamicVariablesTotal + this.costMaterialVariablesTotal + this.costActivityVariablesTotal;
+                        let teamHTML = '';
+                        let costActivityHTML = '';
+                        let costMaterialHTML = '';
+                        let costDinamicHTML = '';
+                        for(contactId in this.teamById) {
+                            const contact = this.teamById[contactId];
+                            teamHTML += `
+                                <div class="content-detail">
+                                    <span>${contact.name} (${contact.hours}h)</span>
+                                    <span>${this.toMoney(contact.value)}</span>
+                                </div>
+                            `;
+                        }
+                        for(variable of this.project.costActivityVariables) {
+                            costActivityHTML += `
+                                <div class="content-detail">
+                                    <span>${variable.name} (${variable.value}h)</span>
+                                    <span>${this.toMoney(variable.value * this.clearNumber(this.project.defaultHourPrice))}</span>
+                                </div>
+                            `;
+                        }
+                        for(variable of this.project.costDinamicVariables) {
+                            costDinamicHTML += `
+                                <div class="content-detail">
+                                    <span>${variable.name}</span>
+                                    <span>${this.toMoney(this.clearNumber(variable.value) * (this.teamHoursTotal / this.project.dailyJourneyTime))}</span>
+                                </div>
+                            `;
+                        }
+                        for(variable of this.project.costMaterialVariables) {
+                            costMaterialHTML += `
+                                <div class="content-detail">
+                                    <span>${variable.name}</span>
+                                    <span>${this.toMoney(this.clearNumber(variable.value) * variable.quantity)}</span>
+                                </div>
+                            `;
+                        }
+                        this.calcModal = `
+                            <div class="calc-sections">
+                                <button class="collapsible" onclick="toggleSection(this)">
+                                    <span>Equipe</span>
+                                    <span>${this.toMoney(this.teamTotal)}</span>
+                                </button>
+                                <div class="content">${teamHTML}</div>
+                                <button class="collapsible" onclick="toggleSection(this)">
+                                    <span>Custos de atividades</span>
+                                    <span>${this.toMoney(this.costActivityVariablesTotal)}</span>
+                                </button>
+                                <div class="content">${costActivityHTML}</div>
+                                <button class="collapsible" onclick="toggleSection(this)">
+                                    <span>Custos dinâmicos</span>
+                                    <span>${this.toMoney(this.costDinamicVariablesTotal)}</span>
+                                </button>
+                                <div class="content">${costDinamicHTML}</div>
+                                <button class="collapsible" onclick="toggleSection(this)">
+                                    <span>Custos de materiais</span>
+                                    <span>${this.toMoney(this.costMaterialVariablesTotal)}</span>
+                                </button>
+                                <div class="content">${costMaterialHTML}</div>
+                                <button class="collapsible collapsible-dark">
+                                    <span>Total <br><small>Diárias estimada: ${Math.round((this.teamHoursTotal / this.project.dailyJourneyTime * 100)) / 100}</small></span>
+                                    <span>${this.toMoney(this.dealTotal)}</span>
+                                </button>
+                            </div>
+                        `;
+                    }
                 },
             });
         </script>
