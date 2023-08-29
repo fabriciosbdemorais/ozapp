@@ -1,4 +1,5 @@
 {
+    "id": "5L6WRZpXZdK8HTwpRa9fi",
     "name": "Ozapp",
     "lang": "pt-br",
     "short_name": "Ozapp",
@@ -6,6 +7,7 @@
     "start_url": "/",
     "scope": "/",
     "display": "standalone",
+    "display_override": ["standalone", "minimal-ui"],
     "theme_color": "#64c2c7",
     "background_color": "#64c2c7",
     "orientation": "portrait",
