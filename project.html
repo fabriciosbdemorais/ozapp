@@ -280,7 +280,7 @@
                                     <label for="name">Nome da atividade</label>
                                     <span class="focus-bg"></span>
                                 </div>
-                                <div :class="{hidden: currentFieldsBlockId !== variable.id}" class="collapsed-fields">
+                                <div :class="{hidden: currentFieldsBlockId !== variable.id}" class="collapsed-fields" @click.self="clearCurrentFieldsBlock">
                                     <div class="field">
                                         <input required type="number" id="name" v-model="variable.value" placeholder=" ">
                                         <label for="name">Horas para concluir</label>
@@ -305,7 +305,7 @@
                                     <label for="name">Nome da variável</label>
                                     <span class="focus-bg"></span>
                                 </div>
-                                <div :class="{hidden: currentFieldsBlockId !== variable.id}" class="collapsed-fields">
+                                <div :class="{hidden: currentFieldsBlockId !== variable.id}" class="collapsed-fields" @click.self="clearCurrentFieldsBlock">
                                     <div class="field">
                                         <input required type="tel" id="name" v-model="variable.value" v-money="moneyOptions" placeholder=" ">
                                         <label for="name">Valor diário</label>
@@ -330,7 +330,7 @@
                                     <label for="name">Nome do material</label>
                                     <span class="focus-bg"></span>
                                 </div>
-                                <div :class="{hidden: currentFieldsBlockId !== variable.id}" class="collapsed-fields">
+                                <div :class="{hidden: currentFieldsBlockId !== variable.id}" class="collapsed-fields" @click.self="clearCurrentFieldsBlock">
                                     <div class="field">
                                         <input type="number" id="daily-journey-time" v-model="variable.quantity" placeholder=" ">
                                         <label for="daily-journey-time">Quantidade</label>

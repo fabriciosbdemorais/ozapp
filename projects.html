@@ -76,7 +76,7 @@
                     if (!projectsStore || !projectsStore.length) {
                         projectsStore = [{
                             ...PROJECT_DEMO,
-                            defaultHourPrice: this.user.defaultHourPrice ? this.user.defaultHourPrice : 'R$ 100',
+                            defaultHourPrice: this.user.defaultHourPrice ? this.user.defaultHourPrice : 'R$ 100,00',
                         }];
                         localStorage.setItem('PROJECTS', JSON.stringify(projectsStore));
                     }

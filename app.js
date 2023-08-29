@@ -23,15 +23,20 @@ function openTab(evt, tabName) {
 }
 
 function toggleSection(e) {
+    const content = e.nextElementSibling;
     const allButtons = document.getElementsByClassName('collapsible');
     const allContents = document.getElementsByClassName('content');
+    if (e.classList.contains('active')) {
+        content.style.maxHeight = null;
+        e.classList.remove('active');
+        return;
+    }
     for(let button of allButtons) {
         button.classList.remove('active');
     }
     for(let content of allContents) {
         content.style.maxHeight = null;
     }
-    const content = e.nextElementSibling;
     if (content.style.maxHeight){
         content.style.maxHeight = null;
     } else {

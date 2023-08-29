@@ -5,6 +5,9 @@
 *::-webkit-scrollbar{
   display: none;
 }
+*:focus {
+  outline: none;
+}
 :root {
   --color-primary: #F19302;
   --color-secondary: #64c2c7;
@@ -146,7 +149,7 @@ button {
   align-items: center;
 }
 .nav .nav-user a.current svg {
-  fill: var(--color-primary);
+  fill: #ffcf86;
 }
 
 /* FIELDS */
@@ -656,7 +659,7 @@ td:hover {
   background-color: transparent;
   font-size: 1em;
   cursor: pointer;
-  color: rgb(255,255,255, .6);
+  color: rgb(255,255,255, .4);
 }
 .deal-categories-menu button.active {
   color: var(--color-light);
