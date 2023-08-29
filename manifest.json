@@ -4,7 +4,7 @@
     "lang": "pt-br",
     "short_name": "Ozapp",
     "description": "Gerencie projetos de organização",
-    "start_url": "/login",
+    "start_url": "/",
     "scope": "/",
     "display": "standalone",
     "display_override": ["standalone", "minimal-ui"],
