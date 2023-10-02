@@ -5,9 +5,6 @@
 *::-webkit-scrollbar{
   display: none;
 }
-*:focus {
-  outline: none;
-}
 :root {
   --color-primary: #F19302;
   --color-secondary: #64c2c7;
